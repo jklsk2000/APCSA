@@ -1,27 +1,25 @@
-package Unit1;
+package unit1;
 
 import javax.swing.JFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GraphicsRunner2 extends JFrame
+public class GraphicsRunner extends JFrame
 {
 	private static final int WIDTH = 800;
 	private static final int HEIGHT = 600;
 
-	public GraphicsRunner2()
+	public GraphicsRunner()
 	{
-		super("MAKE YOUR OWN SHAPE");
+		super("THE MOST AMAZING ROBOT EVER");
 
 		setSize(WIDTH,HEIGHT);
-
-		getContentPane().add(new ShapePanel());
-
+		getContentPane().add(new Robot());
 		setVisible(true);
 	}
 
 	public static void main( String args[] )
 	{
-		GraphicsRunner2 run = new GraphicsRunner2();
+		GraphicsRunner run = new GraphicsRunner();
 	}
 }

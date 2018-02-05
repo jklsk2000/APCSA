@@ -1,4 +1,4 @@
-package Unit1;
+package unit1;
 
 import static java.lang.System.*;
 

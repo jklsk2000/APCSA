@@ -1,4 +1,4 @@
-package Unit1;
+package unit1;
 
 import java.awt.Font;
 import java.awt.Color;

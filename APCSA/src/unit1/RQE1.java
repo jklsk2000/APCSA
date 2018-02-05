@@ -1,4 +1,4 @@
-package Unit1;
+package unit1;
 
 import java.awt.Graphics;
 import java.awt.Color;
@@ -19,6 +19,9 @@ class RQE1 extends Canvas {
 	   
 	   public void paint( Graphics window )
 	   {
+		   window.drawString("Rectangle 1: 7 x 6", 100, 90);
+		   window.drawString("Rectangle 2: 10 x 11", 500, 90);
+
 		   window.setColor(Color.BLACK);
 		   window.drawRect(100,100,7,6);
 		   window.drawRect(500, 100, 10, 11);

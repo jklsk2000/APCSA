@@ -1,4 +1,4 @@
-package Unit0;
+package unit0;
 
 public class Lab0b {
 	public static void main(String[] args) {
