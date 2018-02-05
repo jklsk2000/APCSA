@@ -25,10 +25,16 @@ public class Shape
 
  public void draw(Graphics window)
  {	 
+	window.setColor(color);
+    window.drawLine(xPos, yPos, 3*xPos, yPos);
+    window.drawLine(xPos, yPos, 2 * xPos, 2*yPos);
+    window.drawLine(3*xPos, yPos, 2*xPos, 2*yPos);
     window.setColor(color);
-    window.fillRect(xPos, yPos, width, height);
     
-    window.drawLine(100, 500, 700, 500);
+    window.drawRect(xPos, yPos, width, height);
+    window.drawOval(xPos+100, yPos, 2*width, height);
+    //window.fillOval(xPos+120, yPos, width, height);
+   
     //draw whatever you want
     //    ^
     //  [ :: ]
