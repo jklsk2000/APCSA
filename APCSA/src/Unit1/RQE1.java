@@ -19,6 +19,8 @@ class RQE1 extends Canvas {
 	   
 	   public void paint( Graphics window )
 	   {
-		   window.drawRect(15,15,7,6);
+		   window.setColor(Color.BLACK);
+		   window.drawRect(100,100,7,6);
+		   window.drawRect(500, 100, 10, 11);
 	   }
 }
