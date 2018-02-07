@@ -3,9 +3,9 @@ package unit2;
 public class SavingsAccountTester {
 
 	public static void main (String[] args) {
-		SavingsAccount a = new SavingsAccount();
-		a.setibalance(0.10);
+		BankAccount a = new BankAccount();
+		a.setBankAccount(1000, .10);
 		a.addInterest();
-		a.print();
+		System.out.println(a.getBalance());
 	}
 }

@@ -12,10 +12,10 @@ public class Quadratic
 
 	public Quadratic()
 	{
-		
+		setQuadratic(a,b,c);
 	}
 
-	public Quadratic(int quadA, int quadB, int quadC)
+	public void setQuadratic(int quadA, int quadB, int quadC)
 	{
 		a = quadA;
 		b = quadB;
@@ -24,16 +24,18 @@ public class Quadratic
 
 	public void setEquation(int quadA, int quadB, int quadC)
 	{
-		
+		rootOne = (-quadB - Math.sqrt( Math.pow(quadB, 2) - 4 * quadA * quadC)) / (2 * quadA);
+		rootTwo = (-quadB + Math.sqrt( Math.pow(quadB, 2) - 4 * quadA * quadC)) / (2 * quadA);
 	}
 
 	public void calcRoots( )
 	{
-		
+		rootOne = (-b - Math.sqrt( Math.pow(b, 2) - 4 * a * c)) / (2 * a);
+		rootTwo = (-b + Math.sqrt( Math.pow(b, 2) - 4 * a * c)) / (2 * a);
 	}
 
 	public void print( )
 	{
-		
+		System.out.println("Root one is " + rootOne  + "\nRoot two is " + rootTwo);
 	}
 }
