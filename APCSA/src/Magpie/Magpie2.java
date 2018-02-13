@@ -47,6 +47,10 @@ public class Magpie2
 			{
 				response = "I also have a mother";
 			}
+			else if (statement.indexOf("brother") >= 0)
+			{
+				response = "My brother is very mean to me.";
+			}
 			else
 			{
 				response = "Tell me more about your family.";				
