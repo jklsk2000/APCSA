@@ -9,15 +9,15 @@ public class LetterRemover
 
 	public LetterRemover()
 	{
-		sentence = "";
-		lookFor = 0;
 		//call set
+		sentence = "ravnes";
+		lookFor = 0;
 	}
 
 	//add in second constructor
-	public void LetterRemover()
+	public void LetterRemover(String s, char rem)
 	{
-		setRemover(sentence,lookFor);
+		setRemover(s,rem);
 	}
 	
 	
@@ -32,11 +32,12 @@ public class LetterRemover
 		String cleaned = sentence;
 		int loc = cleaned.indexOf(lookFor);
 		
-		while (loc != -1)
+		while(loc != -1)
 		{
-			cleaned = cleaned.replace(lookFor, '');
+			cleaned = cleaned.substring(0, loc) + cleaned.substring(loc+1);
+			loc = cleaned.indexOf(lookFor);
 		}
-		return cleaned;
+		return cleaned + "\n";
 	}
 
 	public String toString()
