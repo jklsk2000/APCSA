@@ -35,14 +35,33 @@ public class Magpie3
 		}
 		else if (findKeyword(statement, "no") >= 0)
 		{
-			response = "Why so negative?";
+			response = "Why not?";
 		}
 		else if (findKeyword(statement, "mother") >= 0
 				|| findKeyword(statement, "father") >= 0
 				|| findKeyword(statement, "sister") >= 0
 				|| findKeyword(statement, "brother") >= 0)
 		{
-			response = "Tell me more about your family.";
+			if ((findKeyword(statement, "mother") >= 0))
+			{
+				response = "I also have a mother";
+			}
+			else if (findKeyword(statement, "brother") >= 0)
+			{
+				response = "My brother is very mean to me.";
+			}
+			else
+			{
+				response = "Tell me more about your family.";				
+			}
+		}
+		else if((findKeyword(statement, "cat") >= 0  || (findKeyword(statement, "dog")) >= 0))
+		{
+			response = "Tell me more about your pets.";
+		}
+		else if((findKeyword(statement, "Mr. Remington"))>= 0)
+		{
+			response = "He sounds like a good teacher";
 		}
 		else
 		{
@@ -66,15 +85,13 @@ public class Magpie3
 	 *            search at
 	 * @return the index of the first occurrence of goal in
 	 *         statement or -1 if it's not found
-	 */
-	private int findKeyword(String statement, String goal,
-			int startPos)
+	 */ 
+	private int findKeyword(String statement, String goal, int startPos)
 	{
 		String phrase = statement.trim();
 		// The only change to incorporate the startPos is in
 		// the line below
-		int psn = phrase.toLowerCase().indexOf(
-				goal.toLowerCase(), startPos);
+		int psn = phrase.toLowerCase().indexOf(goal.toLowerCase(), startPos);
 
 		// Refinement--make sure the goal isn't part of a
 		// word
@@ -85,15 +102,11 @@ public class Magpie3
 			String before = " ", after = " ";
 			if (psn > 0)
 			{
-				before = phrase.substring(psn - 1, psn)
-						.toLowerCase();
+				before = phrase.substring(psn - 1, psn).toLowerCase();
 			}
 			if (psn + goal.length() < phrase.length())
 			{
-				after = phrase.substring(
-						psn + goal.length(),
-						psn + goal.length() + 1)
-						.toLowerCase();
+				after = phrase.substring(psn + goal.length(), psn + goal.length() + 1).toLowerCase();
 			}
 
 			// If before and after aren't letters, we've
@@ -143,7 +156,7 @@ public class Magpie3
 	 */
 	private String getRandomResponse()
 	{
-		final int NUMBER_OF_RESPONSES = 4;
+		final int NUMBER_OF_RESPONSES = 6;
 		double r = Math.random();
 		int whichResponse = (int) (r * NUMBER_OF_RESPONSES);
 		String response = "";
@@ -163,6 +176,14 @@ public class Magpie3
 		else if (whichResponse == 3)
 		{
 			response = "You don't say.";
+		}
+		else if (whichResponse == 4)
+		{
+			response = "Uh huh. That's great.";
+		}
+		else if (whichResponse == 5)
+		{
+			response = "Yes. I agree.";
 		}
 
 		return response;
