@@ -32,12 +32,13 @@ public class TriangleThree
 		
 		for (int i = 1; i <= size; i++)
 		{
-			for (int c =size; c <= 0; c--)
-			{
-				output += " ";
-			}
 			
-			for (int r = 1; r <=i; r++)
+			for (int k = i; k <= size ; k++)
+		    {
+		        output += " ";
+		    } 
+			
+			for (int r = 1; r <= i; r++)
 			{
 				output += letter;
 			}
