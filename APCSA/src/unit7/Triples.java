@@ -25,11 +25,12 @@ public class Triples
 	{
 		int max = 0;
 
-		for (int i = a; i >= 2; i--)
+		
+		for (int i = a; i > 0; i--)
 		{
 			if (a%i == 0 && b%i == 0 && c%i == 0)
 			{
-				return i;
+				i = max;
 			}
 		}
 		
@@ -45,7 +46,7 @@ public class Triples
 			{
 				for (int a = 1; a < b; a++)
 				{
-					if (a*a + b*b == c*c)
+					if (Math.pow(a, 2) + Math.pow(b, 2) == Math.pow(c, 2))
 					{
 						if ( (a%2 == 1 && b%2 == 0)||(a%2 == 0 && b%2 == 1))
 						{
@@ -64,6 +65,6 @@ public class Triples
 	{
 		String output="";
 		
-		return output+"\n";
+		return output;
 	}
 }
