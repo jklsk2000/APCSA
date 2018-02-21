@@ -26,13 +26,14 @@ public class Triples
 		int max = 0;
 		
 		int lim = Math.min(a, b);
-		lim = Math.min(c, lim);
+		lim = Math.min(lim, c);
 		
-		for (int i = lim; i >= 2; i--)
+		for (int i = 2; i <= lim; i++)
 		{
 			if (a%i == 0 && b%i == 0 && c%i == 0)
 			{
-				return i;
+				i = max;
+				return max;
 			}
 		}
 		
@@ -51,18 +52,20 @@ public class Triples
 			{
 				for (int c = number; c > b; c--)
 				{
-					if (a*a + b*b == c*c)
+					if (Math.pow(a, 2) + Math.pow(b, 2) == Math.pow(c, 2))
 					{
 						if ( (a%2 == 1 && b%2 == 0)||(a%2 == 0 && b%2 == 1))
 						{
 							if (greatestCommonFactor(a,b,c) == 1)
-							output += a + " " + b + " " + c + "\n";
+							{
+								output += a + " " + b + " " + c + "\n";								
+							}
 						}
 					}
 				}
 			}
 		}
 		
-		return output+"\n";
+		return output;
 	}
 }
