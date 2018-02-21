@@ -24,11 +24,8 @@ public class Triples
 	private int greatestCommonFactor(int a, int b, int c)
 	{
 		int max = 0;
-		
-		int lim = Math.min(a, b);
-		lim = Math.min(c, lim);
-		
-		for (int i = lim; i >= 2; i--)
+
+		for (int i = a; i >= 2; i--)
 		{
 			if (a%i == 0 && b%i == 0 && c%i == 0)
 			{
@@ -39,29 +36,33 @@ public class Triples
 
 		return 1;
 	}
-
-	public String toString()
+	
+	public void writeTriple (int num)
 	{
-		String output="";
-
-		
-		for (int a = 0; a < number; a++)
+		for (int c = 1; c < num; c++)
 		{
-			for (int b = number; b > a; b--)
+			for (int b = 1; b < num; b++)
 			{
-				for (int c = number; c > b; c--)
+				for (int a = 1; a < b; a++)
 				{
 					if (a*a + b*b == c*c)
 					{
 						if ( (a%2 == 1 && b%2 == 0)||(a%2 == 0 && b%2 == 1))
 						{
 							if (greatestCommonFactor(a,b,c) == 1)
-							output += a + " " + b + " " + c + "\n";
+							{
+								System.out.println(a + " " + b + " " + c + "\n");
+							}
 						}
 					}
 				}
 			}
 		}
+	}
+
+	public String toString()
+	{
+		String output="";
 		
 		return output+"\n";
 	}
