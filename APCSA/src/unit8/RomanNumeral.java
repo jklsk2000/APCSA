@@ -35,15 +35,60 @@ public class RomanNumeral
 
 	public Integer getNumber()
 	{
+		number = 0;
+		
+		/* int j = 0;
+		
 		for (int i = 0; i < roman.length(); i++)
 		{
+			if (i + 2 <= roman.length())
+			{
+				if (roman.substring(i, i+2).equals(LETTERS[j]))
+				{
+					number += NUMBERS[j];
+					i = i + 2;
+				}
+			}
+			if (roman.substring(i,i+1).equals(LETTERS[j]))
+			{
+				number += NUMBERS[j];
+			}
+			j++;
+		} */
+	
+		roman = roman.replaceAll("CM", "DCCCC");
+		roman = roman.replaceAll("CD", "CCCC");
+		roman = roman.replaceAll("XC", "LXXXX");
+		roman = roman.replaceAll("XL", "XXXX");
+		roman = roman.replaceAll("IX", "VIIII");
+		roman = roman.replaceAll("IV", "IIII");
+		
+		
+		for (int i = 0; i < LETTERS.length; i++)
+		{
+			for (int j = 0; j < roman.length(); j++)
+			{
+				if (roman.substring(j, j+1).equals(LETTERS[i]))
+				{
+					number += NUMBERS[i];
+				}
+			}
 			
 		}
+		
 		return number;
 	}
 
 	public String toString()
 	{
-		return roman + "\n";
+		String output = "";
+		for (int i = 0; i < NUMBERS.length; i++)
+		{
+			while (number >= NUMBERS[i]){
+				number = number - NUMBERS[i];
+				output += LETTERS[i];
+			}
+		}
+		return output + "\n";
 	}
 }
