@@ -16,10 +16,10 @@ public class TriangleThree
 
 	public TriangleThree(int count, String let)
 	{
-		setTriangle(let,count);
+		setTriangle(count,let);
 	}
 
-	public void setTriangle( String let, int sz )
+	public void setTriangle(int sz, String let)
 	{
 		size = sz;
 		letter = let;
