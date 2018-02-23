@@ -36,25 +36,6 @@ public class RomanNumeral
 	public Integer getNumber()
 	{
 		number = 0;
-		
-		/* int j = 0;
-		
-		for (int i = 0; i < roman.length(); i++)
-		{
-			if (i + 2 <= roman.length())
-			{
-				if (roman.substring(i, i+2).equals(LETTERS[j]))
-				{
-					number += NUMBERS[j];
-					i = i + 2;
-				}
-			}
-			if (roman.substring(i,i+1).equals(LETTERS[j]))
-			{
-				number += NUMBERS[j];
-			}
-			j++;
-		} */
 	
 		roman = roman.replaceAll("CM", "DCCCC");
 		roman = roman.replaceAll("CD", "CCCC");

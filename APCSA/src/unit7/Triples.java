@@ -5,7 +5,8 @@ import static java.lang.System.*;
 public class Triples
 {
    private int number;
-
+   String trip;
+   
 	public Triples()
 	{
 		this(0);
@@ -38,7 +39,7 @@ public class Triples
 		return 1;
 	}
 	
-	public void writeTriple (int num)
+	public String writeTriple (int num)
 	{
 		for (int c = 1; c < num; c++)
 		{
@@ -52,19 +53,19 @@ public class Triples
 						{
 							if (greatestCommonFactor(a,b,c) == 1)
 							{
-								System.out.println(a + " " + b + " " + c + "\n");
+								trip = a + " " + b + " " + c + "\n";
 							}
 						}
 					}
 				}
 			}
 		}
+		return trip;
 	}
 
 	public String toString()
 	{
 		String output="";
-		
 		return output;
 	}
 }
