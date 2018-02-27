@@ -78,6 +78,19 @@ public class Deck {
 	 */
 	public void shuffle() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 4 *** */
+		for(int i = 51; i >= 0 ; i--){
+			int r = (int) Math.round((Math.random()  * i));			
+			Card[] shuffled = new Card[52];
+			shuffled[i] = cards[r];
+			cards[r] = cards[i];
+			cards[i] = shuffled[i];
+		}
+		
+		size = 52;
+		System.out.println("Shuffled deck: ");
+		for(int i = 0; i < size; i++){
+			System.out.println(cards[i]);
+		}
 	}
 
 	/**

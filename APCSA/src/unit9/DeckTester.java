@@ -19,5 +19,7 @@ public class DeckTester {
 		System.out.println("I just got dealt a " + test.deal());
 		System.out.println("Deck has " + test.size() + " cards.");
 		System.out.println(test.toString());
+		
+		test.shuffle();
 	}
 }
