@@ -40,7 +40,7 @@ public class Deck {
 		cards = new Card[52];
 		
 		for(int i =0; i<cards.length;i++){
-			
+			System.out.println("github doesn't work");
 		}
 	}
 
