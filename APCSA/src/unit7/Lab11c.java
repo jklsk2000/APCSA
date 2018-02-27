@@ -8,24 +8,24 @@ public class Lab11c
    {
 	   TriangleThree t = new TriangleThree();
 	   
-	   t.setTriangle("A", 3);
+	   t.setTriangle(3, "A");
 	   System.out.println(t.getLetter());
 	   System.out.println(t.toString());
 	   
-	   t.setTriangle("X", 7);
+	   t.setTriangle(7, "X");
 	   System.out.println(t.getLetter());
 	   System.out.println(t.toString());
 
-	   t.setTriangle("R", 1);
+	   t.setTriangle(1, "R");
 	   System.out.println(t.getLetter());
 	   System.out.println(t.toString());
 
-	   t.setTriangle("T", 5);
+	   t.setTriangle(5, "T");
 	   System.out.println(t.getLetter());
 	   System.out.println(t.toString());
 
-	   t.setTriangle("W", 4);
+	   t.setTriangle(4, "W");
 	   System.out.println(t.getLetter());
-	   System.out.println(t.toString());
+	   System.out.println(t.toString()); 
    }
 }
