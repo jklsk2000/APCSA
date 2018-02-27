@@ -13,7 +13,6 @@ public class Deck {
 	/**
 	 * cards contains all the cards in the deck.
 	 */
-	
 	//private List<Card> cards;
 	
 	//Unit 9 - Array version of the Deck
@@ -25,8 +24,9 @@ public class Deck {
 	 * The next card to be dealt is at size - 1.
 	 */
 	private int size;
-
-
+	private String[] ranks = {"ace", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king"};
+	private String[] suits = {"diamonds","clubs","heart","spades"};
+	private int[] values = {1,2,3,4,5,6,7,8,9,10,10,10,10};
 	/**
 	 * Creates a new <code>Deck</code> instance.<BR>
 	 * It pairs each element of ranks with each element of suits,
@@ -37,6 +37,11 @@ public class Deck {
 	 */
 	public Deck(String[] ranks, String[] suits, int[] values) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
+		cards = new Card[52];
+		
+		for(int i =0; i<cards.length;i++){
+			
+		}
 	}
 
 
