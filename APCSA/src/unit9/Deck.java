@@ -44,7 +44,7 @@ public class Deck {
 		for (int i=0;i<cards.length;i++){
 			cards[i] = new Card(ranks[i%13], suits[i/13], values[i%13]);
 		}
-		
+		shuffle();
 		size = 52;
 	}
 
@@ -87,10 +87,10 @@ public class Deck {
 		}
 		
 		size = 52;
-		System.out.println("Shuffled deck: ");
+		/*System.out.println("Shuffled deck: ");
 		for(int i = 0; i < size; i++){
 			System.out.println(cards[i]);
-		}
+		}*/
 	}
 
 	/**
@@ -114,7 +114,7 @@ public class Deck {
 	 */
 	@Override
 	public String toString() {
-		String rtn = "size = " + size + "\nUndealt cards: \n";
+		String rtn = "size = " + size + "\n\nUndealt cards: \n\n";
 
 
 		//Unit 9 - modify to work with Arrays
@@ -130,7 +130,7 @@ public class Deck {
 			}
 		}
 
-		rtn = rtn + "\nDealt cards: \n";
+		rtn = rtn + "\n\nDealt cards: \n\n";
 		for (int k = cards.length - 1; k >= size; k--) {
 			rtn = rtn + cards[k];
 			if (k != size) {
