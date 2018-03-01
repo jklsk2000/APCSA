@@ -7,7 +7,7 @@ public class Lab16d
 	public static void main( String args[] )
 	{
 		//make a new MadLib
-		
+		MadLib m = new MadLib();
 		out.println("\n");
 	}
 }

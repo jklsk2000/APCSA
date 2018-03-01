@@ -23,10 +23,12 @@ public class MadLib
 	public MadLib(String fileName)
 	{
 		//load stuff
-		
+		loadNouns();
+		loadVerbs();
+		loadAdjectives();
 		try{
 			Scanner file = new Scanner(new File(fileName));
-		
+
 		}
 		catch(Exception e)
 		{
