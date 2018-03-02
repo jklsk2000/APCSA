@@ -28,6 +28,7 @@ public class MadLib
 		loadAdjectives();
 		try{
 			Scanner file = new Scanner(new File(fileName));
+			
 
 		}
 		catch(Exception e)
@@ -39,25 +40,12 @@ public class MadLib
 	public void loadNouns()
 	{
 		try{
-			nouns.add("dog");
-			nouns.add("pig");
-			nouns.add("chicken");
-			nouns.add("building");
-			nouns.add("car");
-			nouns.add("person");
-			nouns.add("place");
-			nouns.add("thing");
-			nouns.add("truck");
-			nouns.add("city");
-			nouns.add("state");
-			nouns.add("school");
-			nouns.add("student");
-			nouns.add("bird");
-			nouns.add("turkey");
-			nouns.add("lion");
-			nouns.add("tiger");
-			nouns.add("alligator");
-			nouns.add("elephant");
+			Scanner file1 = new Scanner (new File("nouns.dat"));
+			int i = 0;
+			while (file1.hasNext()){
+				nouns.add(i, file1.next());
+				i++;
+			}
 		}
 		catch(Exception e)
 		{
@@ -69,19 +57,12 @@ public class MadLib
 	public void loadVerbs()
 	{
 		try{
-			verbs.add("run");
-			verbs.add("fly");
-			verbs.add("skip");
-			verbs.add("climb");
-			verbs.add("clean");
-			verbs.add("smell");
-			verbs.add("eat");
-			verbs.add("cry");
-			verbs.add("smile");
-			verbs.add("laugh");
-			verbs.add("jump");
-			verbs.add("crank");
-			verbs.add("program");
+			Scanner file2 = new Scanner (new File("verbs.dat"));
+			int i = 0;
+			while (file2.hasNext()){
+				verbs.add(i, file2.next());
+				i++;
+			}
 		}
 		catch(Exception e)
 		{
@@ -92,22 +73,12 @@ public class MadLib
 	public void loadAdjectives()
 	{
 		try{
-			adjectives.add("blue");
-			adjectives.add("green");
-			adjectives.add("orange");
-			adjectives.add("fat");
-			adjectives.add("skinny");
-			adjectives.add("tall");
-			adjectives.add("funny");
-			adjectives.add("mad");
-			adjectives.add("glad");
-			adjectives.add("happy");
-			adjectives.add("silly");
-			adjectives.add("purple");
-			adjectives.add("big");
-			adjectives.add("little");
-			adjectives.add("tiny");
-			adjectives.add("huge");
+			Scanner file3 = new Scanner (new File("adjectives.dat"));
+			int i = 0;
+			while (file3.hasNext()){
+				adjectives.add(i, file3.next());
+				i++;
+			}
 		}
 		catch(Exception e)
 		{
