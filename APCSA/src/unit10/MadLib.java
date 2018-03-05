@@ -15,21 +15,41 @@ public class MadLib
 	
 	public MadLib()
 	{
-		verbs = new ArrayList<String>();
-		nouns = new ArrayList<String>();
-		adjectives = new ArrayList<String>();
+//		verbs = new ArrayList<String>();
+//		nouns = new ArrayList<String>();
+//		adjectives = new ArrayList<String>();
 	}
 
 	public MadLib(String fileName)
 	{
 		//load stuff
+		nouns = new ArrayList();
 		loadNouns();
+		verbs = new ArrayList();
 		loadVerbs();
+		adjectives = new ArrayList();
 		loadAdjectives();
 		try{
-			Scanner file = new Scanner(new File(fileName));
+			Scanner file = new Scanner(new File (System.getProperty("user.dir") + "\\src\\unit10\\story.dat"));
 			
-
+			while(file.hasNext()){
+				String next = file.next();
+				if(next.equals("#")){
+					System.out.print(getRandomNoun());
+				}
+				else{
+					if(next.equals("@")){
+						System.out.print(getRandomVerb());
+					}
+					else{
+						if(next.equals("&")){
+							System.out.print(getRandomAdjective());
+						}
+					}
+				}
+			}
+			
+			file.close();
 		}
 		catch(Exception e)
 		{
@@ -40,16 +60,15 @@ public class MadLib
 	public void loadNouns()
 	{
 		try{
-			Scanner file1 = new Scanner (new File("nouns.dat"));
-			int i = 0;
-			while (file1.hasNext()){
-				nouns.add(i, file1.next());
-				i++;
+			Scanner file1 = new Scanner (new File (System.getProperty("user.dir") + ("\\src\\unit10\\nouns.dat")));
+			while (file1.hasNextLine()){
+				nouns.add(file1.nextLine());
 			}
+			file1.close();
 		}
 		catch(Exception e)
 		{
-			out.println("Houston we have a problem!");
+			out.println(e);
 		}	
 		
 	}
@@ -57,32 +76,30 @@ public class MadLib
 	public void loadVerbs()
 	{
 		try{
-			Scanner file2 = new Scanner (new File("verbs.dat"));
-			int i = 0;
-			while (file2.hasNext()){
-				verbs.add(i, file2.next());
-				i++;
+			Scanner file2 = new Scanner (new File (System.getProperty("user.dir") + ("\\src\\unit10\\verbs.dat")));
+			while (file2.hasNextLine()){
+				nouns.add(file2.nextLine());
 			}
+			file2.close();
 		}
 		catch(Exception e)
 		{
-			out.println("Houston we have a problem!");
+			out.println(e);
 		}
 	}
 
 	public void loadAdjectives()
 	{
 		try{
-			Scanner file3 = new Scanner (new File("adjectives.dat"));
-			int i = 0;
-			while (file3.hasNext()){
-				adjectives.add(i, file3.next());
-				i++;
+			Scanner file3 = new Scanner (new File (System.getProperty("user.dir") + ("\\src\\unit10\\adjectives.dat")));
+			while (file3.hasNextLine()){
+				nouns.add(file3.nextLine());
 			}
+			file3.close();
 		}
 		catch(Exception e)
 		{
-			out.println("Houston we have a problem!");
+			out.println(e);
 		}
 	}
 
