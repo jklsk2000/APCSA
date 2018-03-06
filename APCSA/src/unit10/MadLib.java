@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
+
 import static java.lang.System.*;
 
 public class MadLib
@@ -13,122 +15,117 @@ public class MadLib
 	private ArrayList<String> nouns;
 	private ArrayList<String> adjectives;
 	
+	private String madlib;
+	private Random rand;
+	
 	public MadLib()
 	{
-//		verbs = new ArrayList<String>();
-//		nouns = new ArrayList<String>();
-//		adjectives = new ArrayList<String>();
+		verbs = new ArrayList<String>();
+		nouns = new ArrayList<String>();
+		adjectives = new ArrayList<String>();
+		
+		loadNouns();
+		loadVerbs();
+		loadAdjectives();
+		rand =  new Random();
 	}
 
 	public MadLib(String fileName)
 	{
-		//load stuff
-		nouns = new ArrayList();
+		verbs = new ArrayList<String>();
+		nouns = new ArrayList<String>();
+		adjectives = new ArrayList<String>();
+		
 		loadNouns();
-		verbs = new ArrayList();
 		loadVerbs();
-		adjectives = new ArrayList();
 		loadAdjectives();
+		
+		rand = new Random();
+		
 		try{
-			Scanner file = new Scanner(new File (System.getProperty("user.dir") + "\\src\\unit10\\story.dat"));
-			
-			while(file.hasNext()){
+			Scanner file = new Scanner(new File(fileName));
+			madlib = "";
+						
+			while (file.hasNext()) {
 				String next = file.next();
-				if(next.equals("#")){
-					System.out.print(getRandomNoun());
+								
+				if (next.equals("#")) {
+					madlib += getRandomNoun();
 				}
-				else{
-					if(next.equals("@")){
-						System.out.print(getRandomVerb());
-					}
-					else{
-						if(next.equals("&")){
-							System.out.print(getRandomAdjective());
-						}
-					}
+				else if (next.equals("@")) {
+					madlib += getRandomVerb();
 				}
+				else if (next.equals("&")) {
+					madlib += getRandomAdjective();
+				}
+				else {
+					madlib += next;
+				}
+				
+				madlib += " ";
 			}
-			
-			file.close();
 		}
 		catch(Exception e)
 		{
 			out.println("Houston we have a problem!");
 		}
+		
 	}
 
 	public void loadNouns()
 	{
 		try{
-			Scanner file1 = new Scanner (new File (System.getProperty("user.dir") + ("\\src\\unit10\\nouns.dat")));
-			while (file1.hasNextLine()){
-				nouns.add(file1.nextLine());
+			Scanner nounsdat = new Scanner(new File("nouns.dat"));
+			
+			while (nounsdat.hasNext()) {
+				nouns.add(nounsdat.next());
 			}
-			file1.close();
 		}
-		catch(Exception e)
-		{
-			out.println(e);
-		}	
-		
+		catch(Exception e) {}
 	}
 	
 	public void loadVerbs()
 	{
 		try{
-			Scanner file2 = new Scanner (new File (System.getProperty("user.dir") + ("\\src\\unit10\\verbs.dat")));
-			while (file2.hasNextLine()){
-				nouns.add(file2.nextLine());
+			Scanner verbsdat = new Scanner(new File("verbs.dat"));
+			
+			while (verbsdat.hasNext()) {
+				verbs.add(verbsdat.next());
 			}
-			file2.close();
 		}
-		catch(Exception e)
-		{
-			out.println(e);
-		}
+		catch(Exception e) {}
 	}
 
 	public void loadAdjectives()
 	{
 		try{
-			Scanner file3 = new Scanner (new File (System.getProperty("user.dir") + ("\\src\\unit10\\adjectives.dat")));
-			while (file3.hasNextLine()){
-				nouns.add(file3.nextLine());
+			Scanner adjdat = new Scanner(new File("adjectives.dat"));
+			
+			while (adjdat.hasNext()) {
+				adjectives.add(adjdat.next());
 			}
-			file3.close();
 		}
-		catch(Exception e)
-		{
-			out.println(e);
-		}
+		catch(Exception e) {}
 	}
 
 	public String getRandomVerb()
 	{
-		String rverb = "";
-		int r = (int) (Math.random() * verbs.size());
-		rverb += verbs.get(r);
-		return rverb;
+		return verbs.get(rand.nextInt(verbs.size()));
 	}
 	
 	public String getRandomNoun()
 	{
-		String rnoun = "";
-		int r = (int) (Math.random() * nouns.size());
-		rnoun += nouns.get(r);
-		return rnoun;
+		return nouns.get(rand.nextInt(nouns.size()));
 	}
 	
 	public String getRandomAdjective()
 	{
-		String radjective = "";
-		int r = (int) (Math.random() * adjectives.size());
-		radjective += adjectives.get(r);
-		return radjective;
+		
+		return adjectives.get(rand.nextInt(adjectives.size()));
 	}		
 
 	public String toString()
 	{
-	   return "\n\n\n";
+	   return madlib;
 	}
 }
