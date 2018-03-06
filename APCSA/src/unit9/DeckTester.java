@@ -16,7 +16,7 @@ public class DeckTester {
 		int[] values = {1,2,3,4,5,6,7,8,9,10,11,12,13};
 		
 		
-		Deck test = new Deck(ranks,suits,values);
+		DeckAL test = new DeckAL(ranks,suits,values);
 		
 		System.out.println("Deck has " + test.size() + " cards.\n");
 		System.out.println("I just got dealt a " + test.deal() + "\n");
@@ -27,6 +27,5 @@ public class DeckTester {
 
 		System.out.println("Deck has " + test.size() + " cards.\n");
 		System.out.println(test.toString());
-		
 	}
 }
