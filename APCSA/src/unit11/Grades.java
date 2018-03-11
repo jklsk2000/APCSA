@@ -44,8 +44,8 @@ public class Grades
 	
 	public double getLowGrade()
 	{
-		double low = Double.MAX_VALUE;
-
+		Arrays.sort(grade);
+		double low = ;
 		return low;
 	}
 	
@@ -58,7 +58,7 @@ public class Grades
 	
 	public int getNumGrades()
 	{
-		return grades.length;
+		return grade.length;
 	}
 	
 	public String toString()
