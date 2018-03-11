@@ -2,13 +2,13 @@ package unit11;
 
 public class Grade {
 	
-	double [] grade;
+	double grade;
 	
-	public Grade(double[] grd) {
+	public Grade(double grd) {
 		setGrade(grd);
 	}
 	
-	public void setGrade(double[] grd) {
+	public void setGrade(double grd) {
 		grade = grd;
 	}
 	
@@ -31,16 +31,14 @@ public class Grade {
 		}
 	}
 	
-	public double getNumericGrade(int y) {
-		return grade[y];
+	public double getNumericGrade() {
+		return grade;
 	}
 	
 	public String toString() {
 		String output = "";
-		for(int i = 0; i < grade.length; i ++){
-			output += getNumericGrade(i) + ": ";
-			output += getLetterGrade(grade[i]) + "\n";
-		}
+		output += getNumericGrade() + ": ";
+		output += getLetterGrade(grade) + "\n";
 		return output;
 	}
 }

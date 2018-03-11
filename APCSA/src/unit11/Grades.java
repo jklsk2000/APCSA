@@ -21,12 +21,12 @@ public class Grades
 	
 	public void setGrades(String gradeList)
 	{
-		Grade temp;
-		
-		int counter = 0;
-		
-		while(gradeList.hasNext()){
-			
+		Scanner glist = new Scanner(gradeList);
+		int count = glist.nextInt();
+		glist.next();
+		for (int i = 0; i < count; i++){
+			double a = glist.nextDouble();
+			grade[i] = new Grade(a);
 		}
 	}
 	

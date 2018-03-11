@@ -13,8 +13,10 @@ public class GradeTester {
 			double x = keyboard.nextDouble();
 			grade[i] = x;
 		}
-		Grade test = new Grade(grade);
-		test.setGrade(grade);
-		System.out.println("\n\n" + test);
+		for(int i = 0; i < 4; i++){
+			Grade test = new Grade(grade[i]);
+			test.setGrade(grade[i]);
+			System.out.print(test.toString());
+		}
 	}
 }
