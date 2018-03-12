@@ -108,7 +108,7 @@ public class Class
 	{
 		String output=""+getClassName()+"\n";
 		for (int i = 0; i < studentList.length; i++){
-			output += studentList[i].toString() + "\t" + studentList[i].getAverage() + "\n";
+			output += String.format(studentList[i].toString() + "\t" + "%.2f", studentList[i].getAverage()) + "\n";
 		}
 		return output;
 	}  	
