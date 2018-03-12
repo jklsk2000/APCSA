@@ -37,22 +37,6 @@ public class GradeBookRunner
 			count++;
 		}
 		
-		
-//		for (int i = 0; i < classSize; i++){
-//			out.println("Enter the name of student "  + i+1) + " : ");
-//			String stuName = keyboard.next();
-//			
-//
-//			out.println("Enter the grades for " + stuName);
-//			out.println("Use the format x - grades (2 - 100 100) : ");
-//
-//			String grades = keyboard.nextLine();
-//
-//			Student s = new Student(stuName, grades);
-//			c.addStudent(i, s);
-//		}
-
-		
 		out.println(c);
 		
 		for (int i = 0; i < classSize; i++){
