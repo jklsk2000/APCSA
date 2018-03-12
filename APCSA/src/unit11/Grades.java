@@ -7,64 +7,77 @@ import static java.util.Arrays.*;
 
 public class Grades
 {
-	private Grade[] grade;
+	private Grade[] gradeList;
 	
 	public Grades()
 	{
 		setGrades("");
 	}
 	
-	public Grades(String gradeList)
+	public Grades(String values)
 	{
-		setGrades(gradeList);		
+		setGrades(values);		
 	}
 	
-	public void setGrades(String gradeList)
+	public void setGrades(String values)
 	{
-		Scanner glist = new Scanner(gradeList);
+		Scanner glist = new Scanner(values);
 		int count = glist.nextInt();
+		gradeList = new Grade[count];
 		glist.next();
 		for (int i = 0; i < count; i++){
-			double a = glist.nextDouble();
-			grade[i] = new Grade(a);
+			Grade a = new Grade(glist.nextDouble());
+			gradeList[i] = a;
 		}
 	}
 	
 	public void setGrade(int spot, double grade)
 	{
-		
+		gradeList[spot] = new Grade(grade);
 	}
 	
 	public double getSum()
 	{
 		double sum=0.0;
-		
+		for(int i = 0; i < gradeList.length; i++){
+			sum += (gradeList[i]).getNumericGrade();
+		}
 		return sum;
 	}
 	
 	public double getLowGrade()
 	{
-		Arrays.sort(grade);
-		double low = ;
+		double low = Double.MAX_VALUE;
+		for (int i = 0; i < gradeList.length; i++){
+			if(low > gradeList[i].getNumericGrade()){
+				low = gradeList[i].getNumericGrade();
+			}
+		}
 		return low;
 	}
 	
 	public double getHighGrade()
 	{
 		double high = Double.MIN_VALUE;
-
+		for (int i = 0; i < gradeList.length; i++){
+			if(high < gradeList[i].getNumericGrade()){
+				high = gradeList[i].getNumericGrade();
+			}
+		}
 		return high;
 	}
 	
 	public int getNumGrades()
 	{
-		return grade.length;
+		return gradeList.length;
 	}
 	
 	public String toString()
 	{
 		String output="";
-
+		for(int i = 0; i < gradeList.length; i++){
+			output += gradeList[i].getNumericGrade() + " ";
+		}
 		return output;
-	}	
+	}
 }
