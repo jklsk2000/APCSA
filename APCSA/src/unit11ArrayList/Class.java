@@ -1,4 +1,4 @@
-package unit11AL;
+package unit11ArrayList;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -10,28 +10,37 @@ import java.util.Collections;
 public class Class
 {
 	private String name;
-	private ArrayList<Student> studentList;
+	//private Student[] studentList;
+	ArrayList<Student> studentList;
 	
 	public Class()
 	{
 		name="";
-		studentList = new ArrayList<Student>(0);
+		//studentList = new Student[0];
+		studentList = new ArrayList<Student>();
 	}
 	
 	public Class(String name, int stuCount)
 	{
 		this.name = name;
+		//studentList = new Student[stuCount];
 		studentList = new ArrayList<Student>(stuCount);
 	}
 	
 	public void addStudent(int stuNum, Student s)
 	{
-		studentList.set(stuNum, s);
+		//studentList[stuNum] = s;
+		studentList.add(s);
 	}
 	
 	public String getClassName()
 	{
 	   return name;	
+	}
+	
+	public ArrayList<Student> sort(){
+		Collections.sort(studentList);
+		return studentList;
 	}
 	
 	public double getClassAverage()
@@ -46,14 +55,14 @@ public class Class
 	
 	public double getStudentAverage(int stuNum)
 	{
-		return studentList.get(stuNum).getAverage();
+		return (studentList.get(stuNum)).getAverage();
 	}
 
 	public double getStudentAverage(String stuName)
 	{
 		int index = 0;
 		for(int i = 0; i < studentList.size(); i++){
-			if (stuName.equals(studentList.get(i).getName())){
+			if (stuName.equals((studentList.get(i)).getName())){
 				index = i;
 			}
 		}
@@ -62,7 +71,7 @@ public class Class
 	
 	public String getStudentName(int stuNum)
 	{
-		return studentList.get(stuNum).getName();
+		return (studentList.get(stuNum)).getName();
 	}
 
 	public String getStudentWithHighestAverage()
@@ -77,7 +86,7 @@ public class Class
 //			}
 //		}
 		Collections.sort(studentList);
-		hName = studentList.get(studentList.size() - 1).getName();
+		hName = (studentList.get(studentList.size() - 1)).getName();
 		return hName;
 	}
 
@@ -94,7 +103,7 @@ public class Class
 //		}
 		
 		Collections.sort(studentList);
-		hName = studentList.get(0).getName();
+		hName = (studentList.get(0)).getName();
 		return hName;
 	}
 	
@@ -103,7 +112,7 @@ public class Class
 		String output="";
 		for(int i = 0; i < studentList.size(); i++){
 			if (getStudentAverage(i) < 70){
-				output += studentList.get(i).getName() + " ";
+				output += (studentList.get(i)).getName() + " ";
 			}
 		}
 		return output;
@@ -113,7 +122,7 @@ public class Class
 	{
 		String output=""+getClassName()+"\n";
 		for (int i = 0; i < studentList.size(); i++){
-			output += String.format(studentList.get(i).toString() + "\t" + "%.2f", studentList.get(i).getAverage()) + "\n";
+			output += String.format((studentList.get(i)).toString() + "\t" + "%.2f", (studentList.get(i)).getAverage()) + "\n";
 		}
 		return output;
 	}  	

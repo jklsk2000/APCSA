@@ -1,29 +1,40 @@
-package unit11AL;
+package unit11ArrayList;
 
 import java.util.Arrays;
 import java.util.Scanner;
 import static java.lang.System.*;
 import static java.util.Arrays.*;
-import java.io.File;
 
-public class GradeBookFileRunner
+public class GradeBookRunner
 {
-   public static void main( String args[] ) throws Exception
+   public static void main( String args[] )
    {
 		out.println("Welcome to the Class Stats program!");
 		
-		Scanner file = new Scanner(new File(System.getProperty("user.dir") + "//src//unit11//gradebook.dat"));
+		Scanner keyboard = new Scanner(System.in);
 		
-		String className = file.nextLine();
-		int classSize = file.nextInt();
-		file.nextLine();
+		out.println("What is the name of this class? ");
+		String className = keyboard.nextLine();
+		
+		out.println("How many students are in this class? ");
+		int classSize = keyboard.nextInt();
+		keyboard.nextLine();
 		Class c = new Class (className, classSize);
 		
-		for (int i = 0; i < classSize; i++) {
-			String stuName = file.nextLine();
-			String grades = file.nextLine();
+		
+		int count = 0;
+		while (count < classSize){
+			out.println("Enter the name of student " + (count + 1) + " : ");
+			String stuName = keyboard.nextLine();
+			
+			out.println("Enter the grades for " + stuName);
+			out.println("Use the format x - grades (2 - 100 100) : ");
+			String grades = keyboard.nextLine();
+			
 			Student s = new Student (stuName, grades);
-			c.addStudent(i, s);
+			c.addStudent(count, s);
+			
+			count++;
 		}
 		
 		out.println(c);

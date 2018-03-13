@@ -1,9 +1,10 @@
-package unit11AL;
+package unit11ArrayList;
 
 import java.util.Arrays;
 import java.util.Scanner;
 import static java.lang.System.*;
 import static java.util.Arrays.*;
+import java.util.ArrayList;
 
 public class Student implements Comparable<Student>
 {

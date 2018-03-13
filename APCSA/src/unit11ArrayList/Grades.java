@@ -1,50 +1,52 @@
-package unit11AL;
+package unit11ArrayList;
 
 import java.util.Arrays;
 import java.util.Scanner;
-import unit11.Grade;
 import static java.lang.System.*;
 import static java.util.Arrays.*;
 import java.util.ArrayList;
 
 public class Grades
 {
-	private ArrayList<Grade> gradeList ;
+	//private Grade[] gradeList;
+	private ArrayList<Grade> gradeList;
 	
 	public Grades()
 	{
 		setGrades("");
 	}
 	
-	public Grades(String gradeList)
+	public Grades(String values)
 	{
-		setGrades(gradeList);		
+		setGrades(values);		
 	}
 	
 	public void setGrades(String values)
 	{
 		Scanner glist = new Scanner(values);
+		
 		int count = glist.nextInt();
+		
+		//gradeList = new Grade[count];
 		gradeList = new ArrayList<Grade>(count);
+		
 		glist.next();
 		for (int i = 0; i < count; i++){
 			Grade a = new Grade(glist.nextDouble());
 			gradeList.add(a);
 		}
-		
 	}
 	
 	public void setGrade(int spot, double grade)
 	{
 		gradeList.set(spot, new Grade(grade));
-
 	}
 	
 	public double getSum()
 	{
 		double sum=0.0;
-		for (int i = 0; i < gradeList.size(); i++){
-			sum += (gradeList.get(i)).getNumericGrade();	
+		for(int i = 0; i < gradeList.size(); i++){
+			sum += (gradeList.get(i)).getNumericGrade();
 		}
 		return sum;
 	}
@@ -53,11 +55,10 @@ public class Grades
 	{
 		double low = Double.MAX_VALUE;
 		for (int i = 0; i < gradeList.size(); i++){
-			if (low > gradeList.get(i).getNumericGrade()){
-				low = gradeList.get(i).getNumericGrade();
+			if(low > (gradeList.get(i)).getNumericGrade()){
+				low = (gradeList.get(i)).getNumericGrade();
 			}
 		}
-
 		return low;
 	}
 	
@@ -65,12 +66,10 @@ public class Grades
 	{
 		double high = Double.MIN_VALUE;
 		for (int i = 0; i < gradeList.size(); i++){
-			if (high < gradeList.get(i).getNumericGrade()){
-				high = gradeList.get(i).getNumericGrade();
+			if(high < (gradeList.get(i)).getNumericGrade()){
+				high = (gradeList.get(i)).getNumericGrade();
 			}
 		}
-
-
 		return high;
 	}
 	
@@ -82,10 +81,9 @@ public class Grades
 	public String toString()
 	{
 		String output="";
-		for (int i = 0; i < gradeList.size(); i++){
-			output += gradeList.get(i).getNumericGrade()+" ";
+		for(int i = 0; i < gradeList.size(); i++){
+			output += (gradeList.get(i)).getNumericGrade() + " ";
 		}
-
 		return output;
-	}	
+	}
 }

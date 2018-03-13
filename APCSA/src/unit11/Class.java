@@ -1,9 +1,12 @@
 package unit11;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
+import unit11.Student;
 import static java.lang.System.*;
 import static java.util.Arrays.*;
+import java.util.ArrayList;
 
 public class Class
 {
@@ -30,6 +33,11 @@ public class Class
 	public String getClassName()
 	{
 	   return name;	
+	}
+	
+	public Student[] sort(){
+		Arrays.sort(studentList);
+		return studentList;
 	}
 	
 	public double getClassAverage()
