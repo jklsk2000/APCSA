@@ -43,8 +43,8 @@ public class Grades
 	public double getSum()
 	{
 		double sum=0.0;
-		for (int i=0; i<gradeList.size(); i++){
-			sum=sum+(gradeList.get(i)).getNumericGrade();	
+		for (int i = 0; i < gradeList.size(); i++){
+			sum += (gradeList.get(i)).getNumericGrade();	
 		}
 		return sum;
 	}
@@ -52,9 +52,9 @@ public class Grades
 	public double getLowGrade()
 	{
 		double low = Double.MAX_VALUE;
-		for (int i=0; i<gradeList.size(); i++){
-			if (low>gradeList.get(i).getNumericGrade()){
-				low=gradeList.get(i).getNumericGrade();
+		for (int i = 0; i < gradeList.size(); i++){
+			if (low > gradeList.get(i).getNumericGrade()){
+				low = gradeList.get(i).getNumericGrade();
 			}
 		}
 
@@ -64,9 +64,9 @@ public class Grades
 	public double getHighGrade()
 	{
 		double high = Double.MIN_VALUE;
-		for (int i=0; i<gradeList.size(); i++){
-			if (high<gradeList.get(i).getNumericGrade()){
-				high=gradeList.get(i).getNumericGrade();
+		for (int i = 0; i < gradeList.size(); i++){
+			if (high < gradeList.get(i).getNumericGrade()){
+				high = gradeList.get(i).getNumericGrade();
 			}
 		}
 
@@ -82,8 +82,8 @@ public class Grades
 	public String toString()
 	{
 		String output="";
-		for (int i=0; i<gradeList.size(); i++){
-			output=output+gradeList.get(i).getNumericGrade()+" ";
+		for (int i = 0; i < gradeList.size(); i++){
+			output += gradeList.get(i).getNumericGrade()+" ";
 		}
 
 		return output;
