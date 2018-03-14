@@ -64,13 +64,18 @@ public class Monster implements Comparable
 	//creates a new copy of this Object
 	public Object clone()
 	{
-	   return new Monster();
+	   return new Monster(getHeight(), getWeight(), getAge());
 	}
 
 	public boolean equals( Object obj )
 	{
-
-
+		Monster rhs = (Monster)obj;
+		
+		if (getHeight() == rhs.getHeight()){
+			if (getWeight() == rhs.getWeight() && getAge() == rhs.getAge()){
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -78,13 +83,37 @@ public class Monster implements Comparable
 	{
 		Monster rhs = (Monster)obj;
 
-		return -1;
+		if (getHeight() > rhs.getHeight()){
+			return 1;
+		}
+		else if (getHeight() < rhs.getHeight()){
+			return -1;
+		}
+		else{
+			if (getWeight() > rhs.getWeight()){
+				return 1;
+			}
+			else if (getWeight() < rhs.getWeight()){
+				return -1;
+			}
+			else {
+				if (getAge() > rhs.getAge()){
+					return 1;
+				}
+				else if (getAge() < rhs.getAge()){
+					return -1;
+				}
+				else{
+					return 0;
+				}
+			}
+		}
 	}
 
 	//write a toString() method
 	public String toString() 
 	{
-		return "";
+		return getHeight() + " " + getWeight() + " " + getAge();
 	}
 	
 }
