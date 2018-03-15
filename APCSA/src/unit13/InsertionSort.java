@@ -14,19 +14,56 @@ class InsertionSort
 	}
 
 	//modifiers
-	public void add( String  word)
+	public void add(String  word)
 	{
 		int loc = 0;
-		list.set(0, word);
+		
+		if (!exist(word)){
+			list.add(loc,word);
+		}
+		else{
+			System.out.println(word + " is already in the list.");
+		}
 	}
 
 	public void remove(String word)
 	{
-		list.remove(word);
+		if (exist(word)){
+			list.remove(word);
+		}
+		else{
+			System.out.println(word + " does not exist in the list.");
+		}
 	}
-
+	
+	private boolean exist(String word){
+		if(Collections.binarySearch(list,word) > 0){
+			return true;
+		}
+		return false;
+	}
+	
 	public String toString()
 	{
-		return "";
+		for (int i=0; i<list.size(); i++){
+			int min = i;
+			for (int j = i + 1; j < list.size(); j++){
+				if (list.get(j).compareTo(list.get(min)) < 0){
+					min = j;
+				}
+			}
+			if (min != i){
+				String filler = list.get(min);
+				list.set(min, list.get(i));
+				list.set(i, filler);
+			}
+		}
+		
+		String output = "";
+		
+		for (int x = 0; x < list.size(); x++){
+			output += list.get(x) + " ";
+		}
+		return output;
 	}
 }
