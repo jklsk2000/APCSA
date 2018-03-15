@@ -17,7 +17,8 @@ public class Lab15d
 		file.nextLine();
 		
 		for(int i=0;i<size;i++){
-			
+			FancyWords f = new FancyWords(file.nextLine());
+			System.out.println(f);
 		}
 	}
 }
