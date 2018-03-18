@@ -9,7 +9,7 @@ public class QuickSort
 
 	public static void quickSort(Comparable[] list)
 	{
-		list = new Comparable[passCount];
+		
 	}
 
 
@@ -38,6 +38,6 @@ public class QuickSort
 			list[bot] = list[top];
 			list[top] = temp;
 		}
-		return 0;
+		return top;
 	}
 }
