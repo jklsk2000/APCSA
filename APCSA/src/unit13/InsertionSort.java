@@ -19,6 +19,8 @@ class InsertionSort
 		int loc = 0;
 		
 		if (!exist(word)){
+			loc = Collections.binarySearch(list, word);
+			loc = Math.abs(loc + 1);
 			list.add(loc,word);
 		}
 		else{

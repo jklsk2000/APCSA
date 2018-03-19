@@ -9,7 +9,8 @@ public class QuickSort
 
 	public static void quickSort(Comparable[] list)
 	{
-		
+		quickSort(list, 0, list.length-1);
+		System.out.println(Arrays.toString(list));
 	}
 
 
@@ -31,13 +32,16 @@ public class QuickSort
 		while (bot < top){
 			while (list[--top].compareTo(pivot) > 0);
 			while (list[++bot].compareTo(pivot) < 0);
+			
 			if(bot >= top){
 				return top;
 			}
+			
 			Comparable temp = list[bot];
 			list[bot] = list[top];
 			list[top] = temp;
 		}
-		return top;
+		System.out.println(Arrays.toString(list));
+		return 0;
 	}
 }
