@@ -10,7 +10,7 @@ public class QuickSort
 	public static void quickSort(Comparable[] list)
 	{
 		passCount = 0;
-		System.out.println("\n\n\n"); 
+		System.out.println("\n\n\n");
 		quickSort(list, 0, list.length-1); //calls second quicksort
 		
 	}

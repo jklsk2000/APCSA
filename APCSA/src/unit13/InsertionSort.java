@@ -29,7 +29,7 @@ class InsertionSort
 	{
 		list.remove(word);
 	}
-	
+
 	private boolean exist(String word){
 		if(Collections.binarySearch(list,word) > 0){
 			return true;
