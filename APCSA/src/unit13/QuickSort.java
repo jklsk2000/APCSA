@@ -9,8 +9,10 @@ public class QuickSort
 
 	public static void quickSort(Comparable[] list)
 	{
-		quickSort(list, 0, list.length-1);
-		System.out.println(Arrays.toString(list));
+		passCount = 0;
+		System.out.println("\n\n\n"); 
+		quickSort(list, 0, list.length-1); //calls second quicksort
+		
 	}
 
 
@@ -20,7 +22,11 @@ public class QuickSort
 			int spot = partition (list,low,high);
 			quickSort(list,low,spot);
 			quickSort(list,spot+1,high);
+			
+			System.out.println("pass " + passCount + " " + Arrays.toString(list));
+			passCount++;
 		}
+
 	}
 
 
@@ -36,12 +42,11 @@ public class QuickSort
 			if(bot >= top){
 				return top;
 			}
-			
+
 			Comparable temp = list[bot];
 			list[bot] = list[top];
 			list[top] = temp;
 		}
-		System.out.println(Arrays.toString(list));
 		return 0;
 	}
 }
