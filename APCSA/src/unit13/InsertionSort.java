@@ -20,24 +20,16 @@ class InsertionSort
 		
 		if (!exist(word)){
 			loc = Collections.binarySearch(list, word);
-			loc = Math.abs(loc + 1);
+			loc = Math.abs(loc)-1;
 			list.add(loc,word);
-		}
-		else{
-			System.out.println(word + " is already in the list.");
 		}
 	}
 
 	public void remove(String word)
 	{
-		if (exist(word)){
-			list.remove(word);
-		}
-		else{
-			System.out.println(word + " does not exist in the list.");
-		}
+		list.remove(word);
 	}
-	
+
 	private boolean exist(String word){
 		if(Collections.binarySearch(list,word) > 0){
 			return true;
