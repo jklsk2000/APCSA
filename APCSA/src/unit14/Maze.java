@@ -21,6 +21,7 @@ public class Maze
 	{
 		been = new boolean [size] [size];
 		maze = new int [size] [size];
+		
 		String[] l = line.split(" ");
 		int[] lint = new int [l.length];
 		
