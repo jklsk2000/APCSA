@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * The ElevensBoard class represents the board in a game of Elevens.
  */
-public class ElevensBoard {
+public class ElevensBoard extends Board{
 
 	/**
 	 * The size (number of cards) on the board.
@@ -45,13 +45,13 @@ public class ElevensBoard {
 	/**
 	 * Flag used to control debugging print statements.
 	 */
-	private static final boolean I_AM_DEBUGGING = false;
-
-
+	private static final boolean I_AM_DEBUGGING = false;	
+	
 	/**
 	 * Creates a new <code>ElevensBoard</code> instance.
 	 */
 	public ElevensBoard() {
+		super(BOARD_SIZE, RANKS, SUITS, POINT_VALUES);
 		cards = new Card[BOARD_SIZE];
 		deck = new Deck(RANKS, SUITS, POINT_VALUES);
 		if (I_AM_DEBUGGING) {
@@ -187,13 +187,7 @@ public class ElevensBoard {
 	 */
 	public boolean isLegal(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
-		if (selectedCards.size() == 2 && containsPairSum11(selectedCards)){
-			return true;
-		}
-		if (selectedCards.size() == 3 && containsJQK(selectedCards)){
-			return true;
-		}
-		return false;
+		return containsPairSum11(selectedCards) || containsJQK(selectedCards);
 	}
 
 	/**
@@ -206,8 +200,7 @@ public class ElevensBoard {
 	 */
 	public boolean anotherPlayIsPossible() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
-		List<Integer> cindex = cardIndexes();
-		return containsPairSum11(cindex) || containsJQK(cindex);
+		return containsPairSum11(cardIndexes()) || containsJQK(cardIndexes());
 	}
 
 
@@ -231,20 +224,18 @@ public class ElevensBoard {
 	private boolean containsPairSum11(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
 		int size = selectedCards.size();
-		
-		if (size != 2){
-			return false;
-		}
+
 	
-		Card cardOne = cardAt(selectedCards.get(0));
-		Card cardTwo = cardAt(selectedCards.get(1));
-		
-		if (cardOne.pointValue() + cardTwo.pointValue() == 11){
-			return true;
+		for (int i = 0 ; i < selectedCards.size(); i ++){
+			Card cardOne = cardAt(selectedCards.get(i));
+			for (int j = i+1; j < selectedCards.size(); j++){
+				Card cardTwo = cardAt(selectedCards.get(j));
+				if (cardOne.pointValue() + cardTwo.pointValue() == 11){
+					return true;
+				}
+			}
 		}
-		else{
-			return false;
-		}
+		return false;
 	}
 
 	/**
@@ -258,10 +249,6 @@ public class ElevensBoard {
 	private boolean containsJQK(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
 		int size = selectedCards.size();
-		
-		if (size != 3){
-			return false;
-		}
 		
 		boolean j = false;
 		boolean q = false;
@@ -278,12 +265,6 @@ public class ElevensBoard {
 				k = true;
 			}
 		}
-		
-		if (j && q && k){
-			return true;
-		}
-		else{
-			return false;
-		}
+		return ( j && q ) && k;
 	}
 }

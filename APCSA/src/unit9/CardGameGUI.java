@@ -162,6 +162,7 @@ public class CardGameGUI extends JFrame implements ActionListener {
 				super.paintComponent(g);
 			}
 		};
+		
 
 		// If board object's class name follows the standard format
 		// of ...Board or ...board, use the prefix for the JFrame title
