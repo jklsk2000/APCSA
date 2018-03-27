@@ -53,10 +53,9 @@ public class Ball extends Block
 
    public void moveAndDraw(Graphics window)
    {
-   	//draw a white ball at old ball location
-	  setColor(Color.WHITE);
-	  draw(window);
-	  
+   		//draw a white ball at old ball location
+	  draw(window, Color.WHITE);
+	  	//setX
       setX(getX()+xSpeed);
 		//setY
       setY(getY()+ySpeed);

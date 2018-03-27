@@ -19,6 +19,7 @@ public class Block implements Locatable
 		height = 10;
 		color = Color.BLACK;
 	}
+	//add other Block constructors - x , y , width, height, color
 	public Block(int x, int y){
 		xPos = x;
 		yPos = y;
@@ -39,6 +40,7 @@ public class Block implements Locatable
 		height = h;
 		color = c;
 	}
+   //add the other set methods
 	public void setPos(int x, int y) {
 		setX(x);
 		setY(y);
@@ -55,9 +57,32 @@ public class Block implements Locatable
 	public void setHeight(int h){
 		height = h;
 	}
-	public void setColor(Color c){
-		color = c;
+	public void setColor(Color col){
+		color = col;
 	}
+
+   public void draw(Graphics window)
+   {
+   	//uncomment after you write the set and get methods
+      window.setColor(color);
+      window.fillRect(getX(), getY(), getWidth(), getHeight());
+   }
+
+   public void draw(Graphics window, Color col)
+   {
+	   window.setColor(col);
+	   window.fillRect(getX(), getY(), getWidth(), getHeight());
+   }
+   
+	public boolean equals(Object obj)
+	{
+		if (((Block) obj).getX() == getX() && ((Block)obj).getY() == getY() && ((Block)obj).getWidth() == getWidth() && ((Block)obj).getHeight() == getHeight() && ((Block)obj).getColor() == getColor()){
+			return true;
+		}
+		return false;
+	}   
+
+   //add the other get methods
 	public int getX() {
 		return xPos;
 	}
@@ -73,14 +98,11 @@ public class Block implements Locatable
 	public Color getColor(){
 		return color;
 	}
-	public void draw (Graphics window){
-		window.setColor(color);
-		window.fillRect(xPos, yPos, width, height);
-	}
+
+   //add a toString() method  - x , y , width, height, color
 	public String toString(){
 		String output = "";
 		output += getX() + " " + getY() + " " + width + " " + height + " " + color;
 		return output;
 	}
 }
-	//add other Block constructors - x , y , width, height, color
