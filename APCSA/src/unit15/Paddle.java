@@ -12,9 +12,9 @@ public class Paddle extends Block
    {
 	   super(10,10);
       speed = 5;
-      setWidth(10);
-      setHeight(10);
-      setColor(Color.BLACK);
+      setWidth(20);
+      setHeight(80);
+      setColor(Color.RED);
    }
    //add the other Paddle constructors
    public Paddle(int x, int y){
