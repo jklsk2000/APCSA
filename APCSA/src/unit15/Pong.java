@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import static java.lang.Character.*;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 public class Pong extends Canvas implements KeyListener, Runnable
 {
@@ -23,7 +24,7 @@ public class Pong extends Canvas implements KeyListener, Runnable
 	private BufferedImage back;
 	private int rightscore;
 	private int leftscore;
-
+	Random rand = new Random();
 
 	public Pong()
 	{
@@ -34,8 +35,8 @@ public class Pong extends Canvas implements KeyListener, Runnable
 //		ball = new BlinkyBall(600,200,10,10,Color.BLUE,2,1);
 //		ball = new SpeedUpBall(600,200,10,10,Color.BLUE,2,1);
 
-		leftPaddle = new Paddle(50,200,20,70,Color.RED,5);
-		rightPaddle = new Paddle(700,200,20,70,Color.RED,5);
+		leftPaddle = new Paddle(50,200,20,95,Color.RED,7);
+		rightPaddle = new Paddle(730,200,20,95,Color.RED,7);
 		rightscore = 0;
 		leftscore = 0;
 
@@ -74,6 +75,7 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		graphToBack.setColor(Color.BLUE);
 		graphToBack.drawString("SCOREBOARD",350,80);
 
+		
 		//see if ball hits left wall or right wall
 		if(!(ball.getX()>=10 && ball.getX()<=780))
 		{
@@ -97,8 +99,31 @@ public class Pong extends Canvas implements KeyListener, Runnable
 			ball.setX(400);
 			ball.setY(300);
 			ball.setColor(Color.BLUE);
-			ball.setXSpeed(3);
-			ball.setYSpeed(2);
+			int dir = rand.nextInt(2);
+			if (dir == 0){
+				ball.setXSpeed(-(int)(Math.random() * 3 + 2));
+			}
+			else{
+				ball.setXSpeed((int)(Math.random() * 3 + 2));
+			}
+			int ranspeed = (int)(Math.random() * 3);
+			int direction = rand.nextInt(2);
+			if (ranspeed == 0){
+				if (direction == 0){
+					ball.setYSpeed(-(ranspeed+1));
+				}
+				else{
+					ball.setYSpeed((ranspeed+1));
+				}
+			}
+			else{
+				if (direction == 0){
+					ball.setYSpeed(-ranspeed);
+				}
+				else{
+					ball.setYSpeed(ranspeed);
+				}
+			}
 		}
 
 		if (ball.didCollideLeft(leftPaddle)|| ball.didCollideRight(rightPaddle)){
