@@ -24,6 +24,7 @@ public class Pong extends Canvas implements KeyListener, Runnable
 	private BufferedImage back;
 	private int rightscore;
 	private int leftscore;
+	private Wall up, down, left, right;
 	Random rand = new Random();
 
 	public Pong()
@@ -37,6 +38,12 @@ public class Pong extends Canvas implements KeyListener, Runnable
 
 		leftPaddle = new Paddle(50,200,20,95,Color.RED,7);
 		rightPaddle = new Paddle(730,200,20,95,Color.RED,7);
+		
+		up = new Wall(0,0,800,10,Color.GRAY);
+		down = new Wall(0,551,800,10,Color.GRAY);
+		left = new Wall(0,10,10,541,Color.GRAY);
+		right = new Wall(774,10,10,541,Color.GRAY);
+		
 		rightscore = 0;
 		leftscore = 0;
 
@@ -72,20 +79,26 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		ball.moveAndDraw(graphToBack);
 		leftPaddle.draw(graphToBack);
 		rightPaddle.draw(graphToBack);
+		up.draw(graphToBack);
+		down.draw(graphToBack);
+		left.draw(graphToBack);
+		right.draw(graphToBack);
+
 		graphToBack.setColor(Color.BLUE);
 		graphToBack.drawString("SCOREBOARD",350,80);
 
 		
 		//see if ball hits left wall or right wall
-		if(!(ball.getX()>=10 && ball.getX()<=780))
+		//if(!(ball.getX()>=10 && ball.getX()<=780))
+		if (ball.didCollideLeft(left) || ball.didCollideRight(right))
 		{
 			ball.setXSpeed(0);
 			ball.setYSpeed(0);
 			
-			if (ball.getX() <= 10){
+			if (ball.didCollideLeft(left)){
 				rightscore = rightscore + 1;
 			}
-			if (ball.getX() >= 780){
+			if (ball.didCollideRight(right)){
 				leftscore = leftscore + 1;
 			}
 			graphToBack.setColor(Color.WHITE);
@@ -133,7 +146,8 @@ public class Pong extends Canvas implements KeyListener, Runnable
 //			ball.setXSpeed(ball.getXSpeed());
 //			ball.setYSpeed(ball.getYSpeed());
 		}
-		if (ball.getY() < 30 || ball.getY() > 550){
+		//if (ball.getY() < 30 || ball.getY() > 550){
+		if (ball.didCollideTop(up) || ball.didCollideBottom(down)){
 			ball.setYSpeed(-ball.getYSpeed());
 			
 //			ball.setXSpeed(ball.getXSpeed());
