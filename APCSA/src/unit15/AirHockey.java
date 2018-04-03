@@ -30,8 +30,8 @@ public class AirHockey extends Canvas implements KeyListener, Runnable
 	{
 		ball = new Ball(600,200,10,10,Color.BLUE,3,2);
 
-		leftPaddle = new Paddle(50,250,40,40,Color.RED,5);
-		rightPaddle = new Paddle(700,250,40,40,Color.RED,5);
+		leftPaddle = new Paddle(50,250,50,50,Color.RED,5);
+		rightPaddle = new Paddle(700,250,50,50,Color.RED,5);
 		
 		up = new Wall(0,0,800,10,Color.GRAY);
 		down = new Wall(0,551,800,10,Color.GRAY);
