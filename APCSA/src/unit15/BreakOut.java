@@ -10,7 +10,6 @@ import java.awt.event.KeyEvent;
 import static java.lang.Character.*;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
-import java.util.Random;
 
 public class BreakOut extends Canvas implements KeyListener, Runnable
 {
@@ -18,33 +17,41 @@ public class BreakOut extends Canvas implements KeyListener, Runnable
 	private Paddle paddle;
 	private boolean[] keys;
 	private BufferedImage back;
-	private int rightscore;
-	private int leftscore;
+	private int score;
 	private Wall up, down, left, right;
+	private Block[][] blocks;
 	
-	private Block blocka;
-	
-	Random rand = new Random();
-
 	public BreakOut()
-	{
-		//set up all variables related to the game
+	{		
+		//Name, Period, Date, Computer Number
+		System.out.println("Name: Danny Lee\nPeriod 4\nDate: 4/4/2018\nComputer Number: 22");
 		
+		//Ball, Paddle, Score
+		ball = new Ball(250,100,10,10,Color.BLUE,4,3);
+		paddle = new Paddle(750,400,20,100,Color.BLUE,7);
+		score = 0;
 		
-		ball = new Ball(600,200,10,10,Color.BLUE,3,2);
-		paddle = new Paddle(400,500,100,20,Color.BLUE,7);
+		//Setting up wall of blocks
+		blocks = new Block [5][4];
+		int spacingHor = 30;
+		int spacingVer = 30;
+		for (int i = 0; i < 5; i++){
+			for (int j = 0; j < 4; j++){
+				blocks[i][j] = new Block (spacingHor,spacingVer,10,80,Color.BLACK);
+				spacingHor += 40;
+			}
+			spacingHor = 30;
+			spacingVer += 105;
+		}
 		
-		blocka = new Block(100,100,100,20,Color.RED);
-		
+		//Setting up walls (Wall.java)
 		up = new Wall(0,0,800,10,Color.GRAY);
 		down = new Wall(0,551,800,10,Color.GRAY);
 		left = new Wall(0,10,10,541,Color.GRAY);
 		right = new Wall(774,10,10,541,Color.GRAY);
 
 		keys = new boolean[2];
-		
-		
-		
+
     	setBackground(Color.WHITE);
 		setVisible(true);
 		new Thread(this).start();
@@ -57,80 +64,125 @@ public class BreakOut extends Canvas implements KeyListener, Runnable
 
    public void paint(Graphics window)
    {
-		//set up the double buffering to make the game animation nice and smooth
 		Graphics2D twoDGraph = (Graphics2D)window;
 
-		//take a snap shop of the current screen and same it as an image
-		//that is the exact same width and height as the current screen
 		if(back==null)
 		   back = (BufferedImage)(createImage(getWidth(),getHeight()));
 
-		//create a graphics reference to the back ground image
-		//we will draw all changes on the background image
 		Graphics graphToBack = back.createGraphics();
 
-
+		//Draw game elements
 		ball.moveAndDraw(graphToBack);
 		paddle.draw(graphToBack);
 		up.draw(graphToBack);
 		down.draw(graphToBack);
 		left.draw(graphToBack);
 		right.draw(graphToBack);
-		blocka.draw(graphToBack);
+		graphToBack.setColor(Color.BLUE);
+		graphToBack.drawString("Score: " + score, 375, 525);
+		for (int i = 0; i < 5; i++){
+			for(int j = 0; j < 4; j++){
+				blocks[i][j].draw(graphToBack);
+			}
+		}
 
 		graphToBack.setColor(Color.BLUE);
 		
-		if (ball.didCollideBottom(down))
+		//Ball colliding with right wall (AKA LOSE)
+		if (ball.didCollideRight(right))
 		{
+			//Stops Ball
 			ball.setXSpeed(0);
 			ball.setYSpeed(0);
 			
+			//Resets Score
+			graphToBack.setColor(Color.WHITE);
+			graphToBack.drawString("Score: " + score, 375, 525);
+			score = 0;
+			graphToBack.drawString("Score: " + score, 375, 525);
+			
+			//Resets Ball
 			ball.draw(graphToBack,Color.WHITE);
-			ball.setX(400);
-			ball.setY(300);
-			ball.setXSpeed(2);
+			ball.setX(300);
+			ball.setY(20);
+			ball.setXSpeed(4);
 			ball.setYSpeed(3);
 			ball.setColor(Color.BLUE);
+			
+			//Resets Wall of Blocks
+			int spacingHor = 30;
+			int spacingVer = 30;
+			for (int i = 0; i < 5; i++){
+				for (int j = 0; j < 4; j++){
+					blocks[i][j] = new Block (spacingHor,spacingVer,10,80,Color.BLACK);
+					spacingHor += 40;
+				}
+				spacingHor = 30;
+				spacingVer += 105;
+			}
 		}
 		
-		if(ball.didCollideBottom(blocka)||ball.didCollideLeft(blocka)||ball.didCollideRight(blocka)||ball.didCollideTop(blocka)){
-			if (ball.didCollideBottom(blocka)||ball.didCollideTop(blocka)){
-				ball.setYSpeed(-ball.getYSpeed());
-			}
-			if(ball.didCollideLeft(blocka)||ball.didCollideRight(blocka)){
-				ball.setXSpeed(-ball.getXSpeed());
-			}
-			blocka.setColor(Color.WHITE);
-			blocka.draw(graphToBack);
-			blocka.setWidth(0);
-			blocka.setHeight(0);
+		//Ball colliding with other walls
+		if (ball.didCollideTop(up) || ball.didCollideBottom(down)){
+			ball.setYSpeed(-ball.getYSpeed());
+		}
+		if (ball.didCollideLeft(left)){
+			ball.setXSpeed(-ball.getXSpeed());
 		}
 		
+		
+		//Ball colliding with paddle
 		if (ball.didCollideTop(paddle) || ball.didCollideBottom(paddle)){
 			ball.setYSpeed(-ball.getYSpeed());
 		}
 		if (ball.didCollideLeft(paddle) || ball.didCollideRight(paddle)){
 			ball.setXSpeed(-ball.getXSpeed());
-			ball.setYSpeed(-ball.getYSpeed());
-		}
-		if (ball.didCollideLeft(left)|| ball.didCollideRight(right)){
-			ball.setXSpeed(-ball.getXSpeed());
 		}
 		
-		if (ball.didCollideTop(up)){
-			ball.setYSpeed(-ball.getYSpeed());
+		
+		//Ball colliding with blocks
+		for (int l = 0; l < 5; l++){
+			for (int m = 0; m < 4; m++){
+				if (ball.didCollideBottom(blocks[l][m])||ball.didCollideLeft(blocks[l][m])||ball.didCollideRight(blocks[l][m])||ball.didCollideTop(blocks[l][m])){
+					if (ball.didCollideBottom(blocks[l][m])||ball.didCollideTop(blocks[l][m])){
+						ball.setYSpeed(-ball.getYSpeed());
+					}
+					if(ball.didCollideLeft(blocks[l][m])||ball.didCollideRight(blocks[l][m])){
+						ball.setXSpeed(-ball.getXSpeed());
+					}
+					blocks[l][m].setColor(Color.WHITE);
+					blocks[l][m].draw(graphToBack);
+					blocks[l][m].setWidth(0);
+					blocks[l][m].setHeight(0);	
+					
+					score += 1;
+					graphToBack.setColor(Color.WHITE);
+					graphToBack.drawString("Score: " + (score - 1), 375, 525);
+					graphToBack.setColor(Color.BLUE);
+					graphToBack.drawString("Score: " + score, 375, 525);
+				}
+			}
 		}
-		//see if the paddles need to be moved
-
-		if(keys[0] == true)
+		
+		
+		//Paddle movement
+		if(keys[0] == true) //W
 		{
-			paddle.moveLeftAndDraw(graphToBack);
+			paddle.moveUpAndDraw(graphToBack);
 		}
-		if(keys[1] == true)
+		if(keys[1] == true) //Z
 		{
-			paddle.moveRightAndDraw(graphToBack);
+			paddle.moveDownAndDraw(graphToBack);
 		}
-
+		
+		//Victory
+		if (score == 20){
+			ball.setXSpeed(0);
+			ball.setYSpeed(0);
+			graphToBack.setColor(Color.BLUE);
+			graphToBack.drawString("YOU WIN!!!", 380, 300);
+		}
+		
 		twoDGraph.drawImage(back, null, 0, 0);
 	}
 
@@ -138,8 +190,8 @@ public class BreakOut extends Canvas implements KeyListener, Runnable
 	{
 		switch(toUpperCase(e.getKeyChar()))
 		{
-			case 'A' : keys[0]=true; break;
-			case 'D' : keys[1]=true; break;
+			case 'W' : keys[0]=true; break;
+			case 'Z' : keys[1]=true; break;
 		}
 	}
 
@@ -147,8 +199,8 @@ public class BreakOut extends Canvas implements KeyListener, Runnable
 	{
 		switch(toUpperCase(e.getKeyChar()))
 		{
-			case 'A' : keys[0]=false; break;
-			case 'D' : keys[1]=false; break;
+			case 'W' : keys[0]=false; break;
+			case 'Z' : keys[1]=false; break;
 		}
 	}
 

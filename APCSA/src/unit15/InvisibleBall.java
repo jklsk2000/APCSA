@@ -49,7 +49,7 @@ class InvisibleBall extends Ball
 	   setX(getX() + getXSpeed());
 	   setY(getY() + getYSpeed());
 	   
-	   if (turnInvis() > 50){
+	   if (turnInvis() > 500000){
 		   draw(window,Color.WHITE);
 	   }
 	   else{
