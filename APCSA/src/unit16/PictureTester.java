@@ -91,6 +91,29 @@ public class PictureTester
 	  beach.explore();
   }
   
+  //mirrorArms
+  public static void testMirrorArms(){
+	  Picture snowman = new Picture("snowman.jpg");
+	  snowman.explore();
+	  snowman.mirrorArms();
+	  snowman.explore();
+  }
+  
+  //mirrorGull
+  public static void testMirrorGull(){
+	  Picture seagull = new Picture("seagull.jpg");
+	  seagull.explore();
+	  seagull.mirrorGull();
+	  seagull.explore();
+  }
+  
+  //collage2
+  public static void testCollage2(){
+	  Picture canvas = new Picture("640x480.jpg");
+	  canvas.createCollage2();
+	  canvas.explore();
+  }
+  
   /** Method to test mirrorVertical */
   public static void testMirrorVertical()
   {
@@ -150,7 +173,7 @@ public class PictureTester
     //testMirrorGull();
     //testMirrorDiagonal();
 	  
-    //testCollage();
+    testCollage2();
     //testCopy();
     //testEdgeDetection();
     //testEdgeDetection2();
