@@ -348,41 +348,43 @@ public class Picture extends SimplePicture
     }   
   }
   
-  public void copy2(Picture fromPic, int startRow, int startCol, int endRow, int endCol)
+  //copy2
+  public void copy2(Picture fromPic, int startRow, int startCol, int sRow, int eRow, int sCol, int eCol)
   {
-    Pixel fromPixel = null;
-    Pixel toPixel = null;
-    Pixel[][] toPixels = this.getPixels2D();
-    Pixel[][] fromPixels = fromPic.getPixels2D();
-    for (int fromRow = 0, toRow = startRow; 
-         fromRow < fromPixels.length &&
-         toRow < endRow; 
-         fromRow++, toRow++)
-    {
-      for (int fromCol = 0, toCol = startCol; 
-           fromCol < fromPixels[0].length &&
-           toCol < endCol;  
-           fromCol++, toCol++)
-      {
-        fromPixel = fromPixels[fromRow][fromCol];
-        toPixel = toPixels[toRow][toCol];
-        toPixel.setColor(fromPixel.getColor());
-      }
-    }   
+	    Pixel fromPixel = null;
+	    Pixel toPixel = null;
+	    Pixel[][] toPixels = this.getPixels2D();
+	    Pixel[][] fromPixels = fromPic.getPixels2D();
+	    for (int fromRow = sRow, toRow = startRow; 
+	         fromRow < eRow &&
+	         toRow < toPixels.length; 
+	         fromRow++, toRow++)
+	    {
+	      for (int fromCol = sCol, toCol = startCol; 
+	           fromCol < eCol &&
+	           toCol < toPixels[0].length;  
+	           fromCol++, toCol++)
+	      {
+	        fromPixel = fromPixels[fromRow][fromCol];
+	        toPixel = toPixels[toRow][toCol];
+	        toPixel.setColor(fromPixel.getColor());
+	      }
+	}   
   }
 
-  public void createCollage2()
+  public void myCollage()
   {
-    Picture flower1 = new Picture("flower1.jpg");
-    Picture flower2 = new Picture("flower2.jpg");
-    this.copy2(flower1,0,0,100,100);
-    this.copy2(flower2,100,0,100,100);
-    this.copy2(flower1,200,0,100,100);
-    Picture flowerNoBlue = new Picture(flower2);
-    flowerNoBlue.zeroBlue();
-    this.copy2(flowerNoBlue,300,0,100,100);
-    this.copy2(flower1,400,0,100,100);
-    this.copy2(flower2,500,0,100,100);
+    Picture jenny = new Picture("jenny-red.jpg");
+    Picture bar = new Picture("barbaraS.jpg");
+    Picture lion = new Picture("femaleLionAndHall.jpg");
+    
+    jenny.grayscale();
+    bar.fixUnderwater();
+
+    this.copy2(jenny,50,50,80,115,105,210);
+    this.copy2(bar, 150, 100, 10, 120, 20, 100);
+    this.copy2(lion, 300, 70, 225, 300, 350, 445);
+    
     this.mirrorVertical();
     this.write("collage.jpg");
   }

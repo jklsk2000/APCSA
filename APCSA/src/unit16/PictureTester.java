@@ -108,10 +108,20 @@ public class PictureTester
   }
   
   //collage2
-  public static void testCollage2(){
+  public static void testCopy2(){
 	  Picture canvas = new Picture("640x480.jpg");
-	  canvas.createCollage2();
+	  Picture beach = new Picture("beach.jpg");
+	  canvas.copy2(beach,10,10,10,300,10,300);
 	  canvas.explore();
+  }
+  
+  //myCollage
+  public static void testMyCollage()
+  {
+    Picture moon = new Picture("moon-surface.jpg");
+    moon.zeroBlue();
+    moon.myCollage();
+    moon.explore();
   }
   
   /** Method to test mirrorVertical */
@@ -173,7 +183,8 @@ public class PictureTester
     //testMirrorGull();
     //testMirrorDiagonal();
 	  
-    testCollage2();
+    //testCollage();
+	testMyCollage();
     //testCopy();
     //testEdgeDetection();
     //testEdgeDetection2();
