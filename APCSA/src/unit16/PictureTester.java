@@ -10,6 +10,26 @@ package unit16;
  */
 public class PictureTester
 {
+	
+	//unit 16 lab assessment - blur
+	public static void testBlur()
+	{
+		Picture flower = new Picture("sakura.png");
+		
+		flower.explore();
+		
+		for (int i = 0; i < 5; i++){
+			flower.blur(125, 75, 350, 250);
+		}
+		flower.explore();
+		
+		for (int i = 0; i < 5; i++){
+			flower.blur(125, 75, 350, 250);
+		}
+		flower.explore();
+	}
+	
+
   /** Method to test zeroBlue */
   public static void testZeroBlue()
   {
@@ -180,6 +200,10 @@ public class PictureTester
     // and comment out the ones you don't want
     // to run
 	  
+	  
+	testBlur();
+
+	  
     //testZeroBlue();
     //testKeepOnlyBlue();
     //testKeepOnlyRed();
@@ -202,7 +226,7 @@ public class PictureTester
     //testCopy();
 //    testEdgeDetection();
 //    testEdgeDetection2();
-    testEdgeDetection3();
+//    testEdgeDetection3();
     //testChromakey();
     //testEncodeAndDecode();
     //testGetCountRedOverValue(250);

@@ -87,6 +87,57 @@ public class Picture extends SimplePicture
     
   }
   
+  //unit 16 lab assessment - blur
+  public void blur(int x, int y, int width, int height)
+  {
+	  Pixel[][] pixels = this.getPixels2D();
+	  Pixel p = null;
+	  Pixel rightPixel = null;
+	  Pixel bottomPixel = null;
+	  
+	  for (int row = y; row < y + height - 2; row++)
+	  {
+	    for (int col = x; col < x + width - 2; col++)
+	    {
+	    	p = pixels[row][col];
+	    	
+	    	int a = col + 1;
+	    	int b = row + 1;
+	    	
+	    	rightPixel = pixels[row][a];
+	    	bottomPixel = pixels[b][col];
+	    	
+	    	while (rightPixel.getColor() == p.getColor()){
+	    		
+	    		rightPixel = pixels[row][a];
+	    		a++;
+	    	} 
+	    	while (bottomPixel.getColor() == p.getColor()){
+	    		
+		    	bottomPixel = pixels[b][col];
+	    		b++;
+	    	}
+	    	
+	    	int avgRed = (p.getRed() + rightPixel.getRed() + bottomPixel.getRed()) / 3;
+	    	int avgBlue = (p.getBlue() + rightPixel.getBlue() + bottomPixel.getBlue()) / 3;
+	    	int avgGreen = (p.getGreen() + rightPixel.getGreen() + bottomPixel.getGreen()) / 3;
+	    	
+	    	p.setRed(avgRed);
+	    	p.setBlue(avgBlue);
+	    	p.setGreen(avgGreen);
+	    	
+	    	rightPixel.setRed(avgRed);
+	    	rightPixel.setBlue(avgBlue);
+	    	rightPixel.setGreen(avgGreen);
+	    	
+	    	bottomPixel.setRed(avgRed);
+	    	bottomPixel.setBlue(avgBlue);
+	    	bottomPixel.setGreen(avgGreen);
+	    }
+	  }
+  }
+  
+  
   /** Method to set the blue to 0 */
   public void zeroBlue()
   {
