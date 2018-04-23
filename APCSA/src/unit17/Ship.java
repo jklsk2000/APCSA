@@ -33,11 +33,12 @@ public class Ship extends MovingThing
 		speed=s;
 		try
 		{
-			image = ImageIO.read(new File(System.getProperty("user-dir")+"//src//unit17//ship.jpg"));
+			image = ImageIO.read(new File("//H:/git/APCSA/APCSA/src/unit17/ship.jpg"));
 		}
 		catch(Exception e)
 		{
 			//feel free to do something here
+			System.out.println("ERROR");
 		}
 	}
 
@@ -55,7 +56,7 @@ public class Ship extends MovingThing
 
 	public void draw( Graphics window )
 	{
-   	window.drawImage(image,getX(),getY(),80,80,null);
+		window.drawImage(image,getX(),getY(),80,80,null);
 	}
 
 	public String toString()

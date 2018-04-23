@@ -78,7 +78,6 @@ public abstract class MovingThing implements Locatable
 
 		if(direction.equals("DOWN"))
 		      setY(getY()+getSpeed());
-
 	}
 
 	public String toString()

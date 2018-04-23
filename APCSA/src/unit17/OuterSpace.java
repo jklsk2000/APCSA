@@ -23,12 +23,13 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 	private Ship ship;
 	private Alien alienOne;
 	private Alien alienTwo;
+	private Ammo ammo;
 
-	/* uncomment once you are ready for this part
-	 *
-	private ArrayList<Alien> aliens;
+	//uncomment once you are ready for this part
+	
+	//private ArrayList<Alien> aliens;
 	private ArrayList<Ammo> shots;
-	*/
+	
 
 	private boolean[] keys;
 	private BufferedImage back;
@@ -40,8 +41,14 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		keys = new boolean[5];
 
 		//instantiate other stuff
-		ship = new Ship(100,100,5);
-
+		ship = new Ship(500,400,3);
+		alienOne = new Alien(100,80,2);
+		alienTwo = new Alien(200,80,2);
+		ammo = new Ammo(ship.getX(), ship.getY(), 3);
+		
+		shots = new ArrayList<Ammo>();
+		//instantiate done
+		
 		this.addKeyListener(this);
 		new Thread(this).start();
 
@@ -67,10 +74,26 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		//we will draw all changes on the background image
 		Graphics graphToBack = back.createGraphics();
 
-		graphToBack.setColor(Color.BLUE);
-		graphToBack.drawString("StarFighter ", 25, 50 );
+		//background stuff
 		graphToBack.setColor(Color.BLACK);
 		graphToBack.fillRect(0,0,800,600);
+		
+		graphToBack.setColor(Color.WHITE);
+		graphToBack.drawString("StarFighter ", 25, 50 );
+		
+		//draw components
+		ship.draw(graphToBack);
+		alienOne.draw(graphToBack);
+		alienTwo.draw(graphToBack);
+		
+		//alien movement
+		alienOne.amove();
+		alienOne.draw(graphToBack);
+		
+		alienTwo.amove();
+		alienTwo.draw(graphToBack);
+		
+		ammo.setPos(ship.getX() + 35, ship.getY());
 
 		if(keys[0] == true)
 		{
@@ -90,9 +113,20 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		{
 			ship.move("DOWN");
 		}
-
+		
+		if(keys[4] == true)
+		{
+			Ammo a = new Ammo(ship.getX() + 35, ship.getY(), 3);
+			shots.add(a);
+			keys[4] = false;
+		}
+		
+		for(Ammo a : shots){
+			a.draw(graphToBack);
+		}
+		
 		//add in collision detection
-
+		
 
 		twoDGraph.drawImage(back, null, 0, 0);
 	}
