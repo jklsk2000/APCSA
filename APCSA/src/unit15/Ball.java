@@ -87,7 +87,7 @@ public class Ball extends Block implements Collidable
 		return output;
 	}
 	
-	//collidalbe methods
+	//collidable methods
 	
 	public boolean didCollideLeft(Object obj){
 		Block b = (Block)obj;

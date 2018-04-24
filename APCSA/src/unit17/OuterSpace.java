@@ -20,14 +20,12 @@ import java.util.ArrayList;
 
 public class OuterSpace extends Canvas implements KeyListener, Runnable
 {
+//	private Alien alienOne;
+//	private Alien alienTwo;
 	private Ship ship;
-	private Alien alienOne;
-	private Alien alienTwo;
-	private Ammo ammo;
-
-	//uncomment once you are ready for this part
-	
-	//private ArrayList<Alien> aliens;
+	private Ammo ammo;	
+//	private ArrayList<Alien> aliens;
+	private Aliens aliens;
 	private ArrayList<Ammo> shots;
 	
 
@@ -42,8 +40,23 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 		//instantiate other stuff
 		ship = new Ship(500,400,3);
-		alienOne = new Alien(100,80,2);
-		alienTwo = new Alien(200,80,2);
+
+//		aliens = new ArrayList<Alien>();
+		
+		//matrix of aliens
+		aliens = new Aliens(10,10,2);
+		
+//		int spacing = 100;
+//		
+//		for(int i = 0; i < 2; i++){
+//			if (i == 0){
+//				aliens.add(new Alien (80,80,2));
+//			}
+//			if (i == 1){
+//				aliens.add(new Alien (200,80,2));
+//			}
+//		}
+		
 		ammo = new Ammo(ship.getX(), ship.getY(), 3);
 		
 		shots = new ArrayList<Ammo>();
@@ -83,24 +96,42 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		
 		//draw components
 		ship.draw(graphToBack);
-		alienOne.draw(graphToBack);
-		alienTwo.draw(graphToBack);
 		
-		//alien movement
-		alienOne.amove();
-		alienOne.draw(graphToBack);
+		//alien movement		
 		
-		alienTwo.amove();
-		alienTwo.draw(graphToBack);
+//		for(int a = 0; a < aliens.size(); a++){
+//			aliens.get(a).move("RIGHT");
+//			aliens.get(a).draw(graphToBack);
+//		}
 		
+//		for(Alien a : aliens){
+//		if (!(a.getX() >= 0 && a.getX() <= 720)){
+//			a.setSpeed(-a.getSpeed());
+//		}
+//	}
+		
+		for(int i = 0; i < aliens.amat().length; i++){
+			for(int j = 0; j < aliens.amat().length; j++){
+				aliens.amat()[i][j].move("RIGHT");
+				aliens.amat()[i][j].draw(graphToBack);
+			}
+		}
+		
+		for(int i = 0; i < aliens.amat().length; i++){
+			for(int j = 0; j < aliens.amat().length; j++){
+				if (!(aliens.amat()[i][j].getX() >= 0 && aliens.amat()[i][j].getX() <= 720)){
+					aliens.amat()[i][j].setSpeed(-aliens.amat()[i][j].getSpeed());
+				}
+			}
+		}
+
+		//ammo placement
 		ammo.setPos(ship.getX() + 35, ship.getY());
 
 		if(keys[0] == true)
 		{
 			ship.move("LEFT");
 		}
-
-		//add code to move stuff
 		if(keys[1] == true)
 		{
 			ship.move("RIGHT");
@@ -123,9 +154,22 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		
 		for(Ammo a : shots){
 			a.draw(graphToBack);
-		}
-		
-		//add in collision detection
+			
+			for(int x = 0; x < aliens.size(); x++){				
+				if (a.getY() <= aliens.get(x).getY()+70 && a.getY()+10 > aliens.get(x).getY() && (a.getX()>=aliens.get(x).getX() + 10 && a.getX()+10<=aliens.get(x).getX()+75)){
+					a.setPos(2000,2000);
+					aliens.get(x).setPos(1000,1000);
+				}
+			}
+			// **** FIX THIS LATER
+//			for(int i = 0; i < aliens.amat().length; i++){
+//				for(int j = 0; j < aliens.amat().length; j++){
+//					if (!(aliens.amat()[i][j].getX() >= 0 && aliens.amat()[i][j].getX() <= 720)){
+//						aliens.amat()[i][j].setSpeed(-aliens.amat()[i][j].getSpeed());
+//					}
+//				}
+//			}
+		}		
 		
 
 		twoDGraph.drawImage(back, null, 0, 0);
@@ -182,10 +226,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		repaint();
 	}
 
-	public void keyTyped(KeyEvent e)
-	{
-	
-	}
+	public void keyTyped(KeyEvent e) { }
 	
 
    public void run()

@@ -52,17 +52,6 @@ public class Alien extends MovingThing
 	{
 	   return speed;
 	}
-	
-	public void amove()
-	{
-		int x = getX();
-		int s = getSpeed();
-		setX(x + s);
-		if (x > 800){
-			setX(0);
-			amove();
-		}
-	}
 
 	public void draw( Graphics window )
 	{
