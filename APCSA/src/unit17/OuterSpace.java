@@ -27,6 +27,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 //	private ArrayList<Alien> aliens;
 	private Aliens aliens;
 	private ArrayList<Ammo> shots;
+	private Alien[][] aa;
 	
 
 	private boolean[] keys;
@@ -45,6 +46,8 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		
 		//matrix of aliens
 		aliens = new Aliens(10,10,2);
+		
+		aa = aliens.amat();
 		
 //		int spacing = 100;
 //		
@@ -110,17 +113,19 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 //		}
 //	}
 		
-		for(int i = 0; i < aliens.amat().length; i++){
-			for(int j = 0; j < aliens.amat().length; j++){
-				aliens.amat()[i][j].move("RIGHT");
-				aliens.amat()[i][j].draw(graphToBack);
+		//alien movement
+		for(int i = 0; i < aa.length; i++){
+			for(int j = 0; j < aa.length; j++){
+				aa[i][j].move("RIGHT");
+				aa[i][j].draw(graphToBack);
 			}
 		}
 		
-		for(int i = 0; i < aliens.amat().length; i++){
-			for(int j = 0; j < aliens.amat().length; j++){
-				if (!(aliens.amat()[i][j].getX() >= 0 && aliens.amat()[i][j].getX() <= 720)){
-					aliens.amat()[i][j].setSpeed(-aliens.amat()[i][j].getSpeed());
+		//alien collide with wall
+		for(int i = 0; i < aa.length; i++){
+			for(int j = 0; j < aa.length; j++){
+				if (!(aa[i][j].getX() >= 0 && aa[i][j].getX() <= 720)){
+					aa[i][j].setSpeed(-aa[i][j].getSpeed());
 				}
 			}
 		}
@@ -155,20 +160,23 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		for(Ammo a : shots){
 			a.draw(graphToBack);
 			
-			for(int x = 0; x < aliens.size(); x++){				
-				if (a.getY() <= aliens.get(x).getY()+70 && a.getY()+10 > aliens.get(x).getY() && (a.getX()>=aliens.get(x).getX() + 10 && a.getX()+10<=aliens.get(x).getX()+75)){
-					a.setPos(2000,2000);
-					aliens.get(x).setPos(1000,1000);
-				}
-			}
-			// **** FIX THIS LATER
-//			for(int i = 0; i < aliens.amat().length; i++){
-//				for(int j = 0; j < aliens.amat().length; j++){
-//					if (!(aliens.amat()[i][j].getX() >= 0 && aliens.amat()[i][j].getX() <= 720)){
-//						aliens.amat()[i][j].setSpeed(-aliens.amat()[i][j].getSpeed());
-//					}
+//			for(int x = 0; x < aliens.size(); x++){				
+//				if (a.getY() <= aliens.get(x).getY()+70 && a.getY()+10 > aliens.get(x).getY() && (a.getX()>=aliens.get(x).getX() + 10 && a.getX()+10<=aliens.get(x).getX()+75)){
+//					a.setPos(2000,2000);
+//					aliens.get(x).setPos(1000,1000);
 //				}
 //			}
+			
+			// **** FIX THIS LATER
+			for(int i = 0; i < aa.length; i++){
+				for(int j = 0; j < aa.length; j++){
+					if (a.getY() <= aa[i][j].getY()+70 && a.getY()+10 > aa[i][j].getY() 
+							&& (a.getX()>=aa[i][j].getX() + 10 && a.getX()+10<=aa[i][j].getX()+75)){
+						a.setPos(2000,2000);
+						aa[i][j].setPos(1000,1000);
+					}
+				}
+			}
 		}		
 		
 
