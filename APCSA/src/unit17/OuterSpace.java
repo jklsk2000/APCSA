@@ -167,7 +167,6 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 //				}
 //			}
 			
-			// **** FIX THIS LATER
 			for(int i = 0; i < aa.length; i++){
 				for(int j = 0; j < aa.length; j++){
 					if (a.getY() <= aa[i][j].getY()+70 && a.getY()+10 > aa[i][j].getY() 
