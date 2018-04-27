@@ -15,8 +15,12 @@ import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import static java.lang.Character.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Random;
+
+import javax.imageio.ImageIO;
 
 public class OuterSpace extends Canvas implements KeyListener, Runnable
 {
@@ -27,7 +31,13 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 //	private ArrayList<Alien> aliens;
 	private Aliens aliens;
 	private ArrayList<Ammo> shots;
+	private ArrayList<AAmmo> ashots;
 	private Alien[][] aa;
+	private int points = 0;
+	private Random rand;
+	private boolean puhere;
+	private PowerUp pu;
+	private ShipS sship;
 	
 
 	private boolean[] keys;
@@ -61,8 +71,12 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 //		}
 		
 		ammo = new Ammo(ship.getX(), ship.getY(), 3);
-		
 		shots = new ArrayList<Ammo>();
+		ashots = new ArrayList<AAmmo>();
+		rand = new Random();
+		puhere = true;
+		pu = new PowerUp(100,400,0);
+		sship = new ShipS(8000,8000,3);
 		//instantiate done
 		
 		this.addKeyListener(this);
@@ -96,12 +110,12 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		
 		graphToBack.setColor(Color.WHITE);
 		graphToBack.drawString("StarFighter ", 25, 50 );
+		graphToBack.drawString("Points: " + points, 25, 500);
 		
 		//draw components
 		ship.draw(graphToBack);
 		
 		//alien movement		
-		
 //		for(int a = 0; a < aliens.size(); a++){
 //			aliens.get(a).move("RIGHT");
 //			aliens.get(a).draw(graphToBack);
@@ -136,36 +150,66 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		if(keys[0] == true)
 		{
 			ship.move("LEFT");
+			sship.move("LEFT");
 		}
 		if(keys[1] == true)
 		{
 			ship.move("RIGHT");
+			sship.move("RIGHT");
+
 		}
 		if(keys[2] == true)
 		{
 			ship.move("UP");
+			sship.move("UP");
 		}
 		if(keys[3] == true)
 		{
 			ship.move("DOWN");
+			sship.move("DOWN");
+
 		}
 		
 		if(keys[4] == true)
 		{
 			Ammo a = new Ammo(ship.getX() + 35, ship.getY(), 3);
+			Ammo sa = new Ammo(sship.getX() + 35, sship.getY(), 3);
 			shots.add(a);
+			shots.add(sa);
 			keys[4] = false;
 		}
 		
+		//ALIENS SHOOTING
+		int r = (int)(Math.random() * 100) + 1;
+		int row = rand.nextInt(3);
+		int col = rand.nextInt(3);
+		
+		if(r > 98){
+			AAmmo b = new AAmmo(aa[row][col].getX() + 35, aa[row][col].getY() + 60, 2);
+			ashots.add(b);
+		}
+		
+		for(AAmmo ashot : ashots){
+			ashot.draw(graphToBack);
+			if (ashot.getY() + 10 >= ship.getY() && ashot.getY() < ship.getY() + 70 && 
+					(ashot.getX() >= ship.getX() && ashot.getX() + 10 <= ship.getX() + 60) ){
+				ashot.setPos(2000, 2000);
+				points--;
+				graphToBack.setColor(Color.BLACK);
+				graphToBack.drawString("Points: " + (points+1), 25, 500);
+				graphToBack.setColor(Color.WHITE);
+				graphToBack.drawString("Points: " + points, 25, 500);
+			}
+			
+			if (ashot.getY() + 10 >= sship.getY() && ashot.getY() < sship.getY() + 70 && 
+					(ashot.getX() >= sship.getX() && ashot.getX() + 10 <= sship.getX() + 60) ){
+				ashot.setPos(2000, 2000);
+			}
+		}
+		
+		//SHIP SHOOTING
 		for(Ammo a : shots){
 			a.draw(graphToBack);
-			
-//			for(int x = 0; x < aliens.size(); x++){				
-//				if (a.getY() <= aliens.get(x).getY()+70 && a.getY()+10 > aliens.get(x).getY() && (a.getX()>=aliens.get(x).getX() + 10 && a.getX()+10<=aliens.get(x).getX()+75)){
-//					a.setPos(2000,2000);
-//					aliens.get(x).setPos(1000,1000);
-//				}
-//			}
 			
 			for(int i = 0; i < aa.length; i++){
 				for(int j = 0; j < aa.length; j++){
@@ -173,11 +217,44 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 							&& (a.getX()>=aa[i][j].getX() + 10 && a.getX()+10<=aa[i][j].getX()+75)){
 						a.setPos(2000,2000);
 						aa[i][j].setPos(1000,1000);
+						
+						points++;
+						graphToBack.setColor(Color.BLACK);
+						graphToBack.drawString("Points: " + (points-1), 25, 500);
+						graphToBack.setColor(Color.WHITE);
+						graphToBack.drawString("Points: " + points, 25, 500);
+
 					}
 				}
 			}
+			
+			
+//			for(int x = 0; x < aliens.size(); x++){				
+//			if (a.getY() <= aliens.get(x).getY()+70 && a.getY()+10 > aliens.get(x).getY() && (a.getX()>=aliens.get(x).getX() + 10 && a.getX()+10<=aliens.get(x).getX()+75)){
+//				a.setPos(2000,2000);
+//				aliens.get(x).setPos(1000,1000);
+//				}
+//			}
+			
 		}		
+
 		
+		//POWERUP
+		pu.draw(graphToBack);
+		if(pu.getX() + 50> ship.getX() && pu.getX()  <= ship.getX() + 120 && 
+				(pu.getY() + 50 >= ship.getY() && pu.getY()+50 <= ship.getY()+100)){
+			pu.setPos(2000, 2000);
+			
+			sship.setPos(ship.getX(),ship.getY());
+			ship.setPos(5000,5000);
+			
+			puhere = false;
+		}
+		
+		if(puhere = false){
+			sship.draw(graphToBack);
+		}
+		sship.draw(graphToBack);
 
 		twoDGraph.drawImage(back, null, 0, 0);
 	}
