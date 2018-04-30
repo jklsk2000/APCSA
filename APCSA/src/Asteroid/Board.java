@@ -17,6 +17,9 @@ public class Board extends Canvas implements KeyListener, Runnable
 
 	private boolean[] keys;
 	private BufferedImage back;
+	
+	private Spaceship ship;
+	private Asteroid ast;
 
 	public Board()
 	{
@@ -25,10 +28,10 @@ public class Board extends Canvas implements KeyListener, Runnable
 		keys = new boolean[5];	
 		this.addKeyListener(this);
 		new Thread(this).start();
+		
+		ship = new Spaceship(200,200,3);
+		ast = new Asteroid(400,200,5);
 
-		
-		
-		
 		setVisible(true);
 	}
 
@@ -44,17 +47,14 @@ public class Board extends Canvas implements KeyListener, Runnable
 		   back = (BufferedImage)(createImage(getWidth(),getHeight()));
 		Graphics graphToBack = back.createGraphics();
 
-		//background stuff
 		graphToBack.setColor(Color.BLACK);
 		graphToBack.fillRect(0,0,800,600);
 		
 		graphToBack.setColor(Color.WHITE);
-		graphToBack.drawString("ASTEROID", 25, 50 );
+		graphToBack.drawString("ASTEROID", 25, 50);
 		
-		
-		//ADD CODE 
-		
-		
+		ship.draw(graphToBack);
+		ast.draw(graphToBack);
 		
 		if(keys[0] == true)
 		{
