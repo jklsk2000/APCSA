@@ -2,8 +2,8 @@ package Asteroid;
 
 public interface Collidable
 {
-	boolean didCollideLeft(Object obj);
-	boolean didCollideRight(Object obj);
-	boolean didCollideTop(Object obj);
-	boolean didCollideBottom(Object obj);
+	boolean cLeft(Object obj);
+	boolean cRight(Object obj);
+	boolean cTop(Object obj);
+	boolean cBottom(Object obj);
 }

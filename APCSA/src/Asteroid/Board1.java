@@ -9,63 +9,65 @@ import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import static java.lang.Character.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.Random;
 
-public class Board extends Canvas implements KeyListener, Runnable
+import javax.imageio.ImageIO;
+
+public class Board1 extends Canvas implements KeyListener, Runnable
 {
+
+	private Spaceship ship;
 
 	private boolean[] keys;
 	private BufferedImage back;
-	
-	
-	private Spaceship ship;
-	
-	//ASTEROID PARAMETERS
-//	private ArrayList <Asteroid> ast; 
-//	private int size;
-//	private int apos;
-	
-	
-	private long starttime;
 
-	public Board()
+	public Board1()
 	{
 		setBackground(Color.black);
 
-		keys = new boolean[5];	
+		keys = new boolean[5];
+
+		ship = new Spaceship(500,400,3);
+
 		this.addKeyListener(this);
 		new Thread(this).start();
-		
-		ship = new Spaceship(200,200,3);
-//		ast = new ArrayList<Asteroid>();
-
 
 		setVisible(true);
 	}
 
-	public void update(Graphics window)
-	{
+ public void update(Graphics window)
+ {
 	   paint(window);
-	}
+ }
 
 	public void paint( Graphics window )
 	{
-		//BACKGROUND
+		//set up the double buffering to make the game animation nice and smooth
 		Graphics2D twoDGraph = (Graphics2D)window;
+
+		//take a snap shop of the current screen and same it as an image
+		//that is the exact same width and height as the current screen
 		if(back==null)
 		   back = (BufferedImage)(createImage(getWidth(),getHeight()));
+
+		//create a graphics reference to the back ground image
+		//we will draw all changes on the background image
 		Graphics graphToBack = back.createGraphics();
+
+		//background stuff
+		graphToBack.setColor(Color.BLACK);
+		graphToBack.fillRect(0,0,800,600);
 		
 		graphToBack.setColor(Color.WHITE);
-		graphToBack.drawString("ASTEROID", 25, 50);
-		
+		graphToBack.drawString("ASTEROID ", 25, 50 );
+
 		
 		ship.draw(graphToBack);
 		
-		//SHIP MOVEMENT
+
 		if(keys[0] == true)
 		{
 			ship.move("W");
@@ -73,6 +75,7 @@ public class Board extends Canvas implements KeyListener, Runnable
 		if(keys[1] == true)
 		{
 			ship.move("A");
+
 		}
 		if(keys[2] == true)
 		{
@@ -81,11 +84,15 @@ public class Board extends Canvas implements KeyListener, Runnable
 		if(keys[3] == true)
 		{
 			ship.move("D");
+
 		}
+		
 		if(keys[4] == true)
 		{
 		}
 		
+
+
 		twoDGraph.drawImage(back, null, 0, 0);
 	}
 

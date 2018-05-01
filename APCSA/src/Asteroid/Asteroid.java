@@ -11,26 +11,36 @@ public class Asteroid extends MovingThing
 {
 	private int speed;
 	private Image image;
-	private Random rand;
+	private int size;
 
 	public Asteroid()
 	{
 		this(0,0,0);
-		rand = new Random();
+		size = 0;
 	}
 
-	public Asteroid(int x, int y)
+	public Asteroid(int x, int y, int sz)
 	{
-		this(x,y,0);
+		this(x,y,0,0);
 	}
 
-	public Asteroid(int x, int y, int s)
+	public Asteroid(int x, int y, int s, int sz)
 	{
 		super(x, y);
-		speed=s;		
+		speed=s;
+		size = sz;
+		
 		try
 		{
-			image = ImageIO.read(new File("hast.png"));
+			if (size == 0){
+				image = ImageIO.read(new File("sast.png"));			
+			}
+			if (size == 1){
+				image = ImageIO.read(new File("bast.png"));		
+			}
+			if (size == 2) {
+				image = ImageIO.read(new File("hast.png"));
+			}
 		}
 		catch(Exception e)
 		{
@@ -46,6 +56,29 @@ public class Asteroid extends MovingThing
 	public int getSpeed()
 	{
 	   return speed;
+	}
+	
+	public int getWidth(){
+		if (size == 0){
+			return 40;
+		}
+		else if (size == 1){
+			return 60;
+		}
+		else {
+			return 75;
+		}
+	}
+	public int getHeight(){
+		if (size == 0){
+			return 29;
+		}
+		else if (size == 1){
+			return 51;
+		}
+		else {
+			return 72;
+		}
 	}
 
 	public void draw( Graphics window )
