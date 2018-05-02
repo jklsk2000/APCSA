@@ -72,7 +72,17 @@ public class Spaceship extends MovingThing implements Collidable
 	public boolean cBottom(Object obj){
 		Asteroid a = (Asteroid)obj;
 		return getY() <= a.getY() + a.getHeight() && getY() + 55 > a.getY() && 
-				(getX() >= a.getX() && getX() + 40 <= a.getX() + a.getWidth());
+				(getX() >= a.getX() - 30 && getX() + 40 <= a.getX() + a.getWidth() + 30);
+	}
+	public boolean cpBottom(Object obj){
+		PowerUp p = (PowerUp)obj;
+		return getY() <= p.getY() + p.getHeight() && getY() + 55 > p.getY() && 
+				(getX() >= p.getX() - 30 && getX() + 40 <= p.getX() + p.getWidth() + 30);
+	}
+	public boolean cpTop(Object obj){
+		PowerUp p = (PowerUp)obj;
+		return getY() + 55 >= p.getY() && getY() < p.getY() + p.getHeight() && 
+				(getX() >= p.getX() - 30 && getX() + 40 <= p.getX() + p.getWidth() + 30);
 	}
 	
 

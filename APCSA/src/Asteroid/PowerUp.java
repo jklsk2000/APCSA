@@ -1,5 +1,6 @@
 package Asteroid;
 
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -7,40 +8,29 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import java.util.Random;
 
-public class Asteroid extends MovingThing
+public class PowerUp extends MovingThing
 {
 	private int speed;
 	private Image image;
-	private int size;
 
-	public Asteroid()
+	public PowerUp()
 	{
 		this(0,0,0);
-		size = 0;
 	}
 
-	public Asteroid(int x, int y, int sz)
+	public PowerUp(int x, int y)
 	{
-		this(x,y,0,0);
+		this(x,y,0);
 	}
 
-	public Asteroid(int x, int y, int s, int sz)
+	public PowerUp(int x, int y, int s)
 	{
 		super(x, y);
 		speed=s;
-		size = sz;
 		
 		try
 		{
-			if (size == 0){
-				image = ImageIO.read(new File("sast.png"));			
-			}
-			if (size == 1){
-				image = ImageIO.read(new File("bast.png"));		
-			}
-			if (size == 2) {
-				image = ImageIO.read(new File("hast.png"));
-			}
+			image = ImageIO.read(new File("Powerup.png"));			
 		}
 		catch(Exception e)
 		{
@@ -59,26 +49,10 @@ public class Asteroid extends MovingThing
 	}
 	
 	public int getWidth(){
-		if (size == 0){
-			return 40;
-		}
-		else if (size == 1){
-			return 60;
-		}
-		else {
-			return 75;
-		}
+		return 10;
 	}
 	public int getHeight(){
-		if (size == 0){
-			return 29;
-		}
-		else if (size == 1){
-			return 51;
-		}
-		else {
-			return 72;
-		}
+		return 16;
 	}
 
 	public void draw( Graphics window )

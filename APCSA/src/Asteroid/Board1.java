@@ -20,17 +20,30 @@ public class Board1 extends Canvas implements KeyListener, Runnable
 {
 
 	private Spaceship ship;
+	private ArrayList <Asteroid> ast;
+	private ArrayList <PowerUp> pu;
+	
+	private Random rand;
+	private int lives;
+	private int ammocnt;
 
 	private boolean[] keys;
 	private BufferedImage back;
+	
 
 	public Board1()
 	{
 		setBackground(Color.black);
 
 		keys = new boolean[5];
-
+		
+		rand = new Random();
 		ship = new Spaceship(500,400,3);
+		ast = new ArrayList<Asteroid>();
+		pu = new ArrayList <PowerUp> ();
+		
+		lives = 3;
+		ammocnt = 0;
 
 		this.addKeyListener(this);
 		new Thread(this).start();
@@ -45,28 +58,51 @@ public class Board1 extends Canvas implements KeyListener, Runnable
 
 	public void paint( Graphics window )
 	{
-		//set up the double buffering to make the game animation nice and smooth
 		Graphics2D twoDGraph = (Graphics2D)window;
-
-		//take a snap shop of the current screen and same it as an image
-		//that is the exact same width and height as the current screen
 		if(back==null)
 		   back = (BufferedImage)(createImage(getWidth(),getHeight()));
-
-		//create a graphics reference to the back ground image
-		//we will draw all changes on the background image
 		Graphics graphToBack = back.createGraphics();
-
-		//background stuff
 		graphToBack.setColor(Color.BLACK);
 		graphToBack.fillRect(0,0,800,600);
-		
 		graphToBack.setColor(Color.WHITE);
 		graphToBack.drawString("ASTEROID ", 25, 50 );
+		graphToBack.drawString("LIVES: " + lives,25,70);
+		graphToBack.drawString("AMMO: " + ammocnt,25,90);
 
-		
 		ship.draw(graphToBack);
 		
+		
+		int r = (int)(Math.random() * 800);
+		int sz = rand.nextInt(3);
+		int go = rand.nextInt(1000000);
+		if (go > 980000){
+			ast.add(new Asteroid(r,0,2,sz));
+		}		
+		
+		for(int i = 0; i < ast.size(); i++){
+//			if (lives == 0){
+//				break;
+//			}
+			ast.get(i).draw(graphToBack);
+			if (ship.cTop(ast.get(i)) || ship.cBottom(ast.get(i)) || ship.cRight(ast.get(i)) || ship.cLeft(ast.get(i))){
+				ast.get(i).setPos(1000, 1000);
+				lives--;
+			}
+		}
+		
+		int s = (int)(Math.random() * 800);
+		int gopu = rand.nextInt(1000000);
+		if (gopu > 999000){
+			pu.add(new PowerUp(s,0,3));
+		}
+		
+		for(int i = 0; i < pu.size(); i++){
+			pu.get(i).draw(graphToBack);
+			if (ship.cpTop(pu.get(i)) || ship.cpBottom(pu.get(i))){
+				pu.get(i).setPos(1000, 1000);
+				ammocnt++;
+			}
+		}
 
 		if(keys[0] == true)
 		{
@@ -75,7 +111,6 @@ public class Board1 extends Canvas implements KeyListener, Runnable
 		if(keys[1] == true)
 		{
 			ship.move("A");
-
 		}
 		if(keys[2] == true)
 		{
@@ -84,15 +119,13 @@ public class Board1 extends Canvas implements KeyListener, Runnable
 		if(keys[3] == true)
 		{
 			ship.move("D");
-
 		}
 		
 		if(keys[4] == true)
 		{
 		}
 		
-
-
+		
 		twoDGraph.drawImage(back, null, 0, 0);
 	}
 
