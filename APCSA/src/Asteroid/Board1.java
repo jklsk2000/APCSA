@@ -93,7 +93,7 @@ public class Board1 extends Canvas implements KeyListener, Runnable
 		int s = (int)(Math.random() * 800);
 		int gopu = rand.nextInt(1000000);
 		if (gopu > 999000){
-			pu.add(new PowerUp(s,0,3));
+			pu.add(new PowerUp(s,0,2));
 		}
 		
 		for(int i = 0; i < pu.size(); i++){
@@ -148,7 +148,7 @@ public class Board1 extends Canvas implements KeyListener, Runnable
 		{
 			keys[3] = true;
 		}
-		if (e.getKeyCode() == KeyEvent.VK_SPACE)
+		if (e.getKeyCode() == KeyEvent.VK_ENTER)
 		{
 			keys[4] = true;
 		}
@@ -173,7 +173,7 @@ public class Board1 extends Canvas implements KeyListener, Runnable
 		{
 			keys[3] = false;
 		}
-		if (e.getKeyCode() == KeyEvent.VK_SPACE)
+		if (e.getKeyCode() == KeyEvent.VK_ENTER)
 		{
 			keys[4] = false;
 		}
