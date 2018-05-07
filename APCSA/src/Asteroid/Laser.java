@@ -1,36 +1,34 @@
 package Asteroid;
 
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import javax.imageio.ImageIO;
-import java.util.Random;
 
-public class PowerUp extends MovingThing
+public class Laser extends MovingThing
 {
 	private int speed;
 	private Image image;
 
-	public PowerUp()
+	public Laser()
 	{
 		this(0,0,0);
 	}
 
-	public PowerUp(int x, int y)
+	public Laser(int x, int y)
 	{
 		this(x,y,0);
 	}
 
-	public PowerUp(int x, int y, int s)
+	public Laser(int x, int y, int s)
 	{
-		super(x, y);
-		speed=s;
+		super(x,y);
+		speed = s;
 		
 		try
 		{
-			image = ImageIO.read(new File("Powerup.png"));			
+			image = ImageIO.read(new File("laser.png"));			
 		}
 		catch(Exception e)
 		{
@@ -47,20 +45,19 @@ public class PowerUp extends MovingThing
 	{
 	   return speed;
 	}
-	
-	public int getWidth(){
-		return 15;
-	}
-	public int getHeight(){
-		return 24;
-	}
 
 	public void draw( Graphics window )
 	{
 		window.drawImage(image,getX(),getY(),null);
-		this.move("S");
+		this.move("W");
 	}
 
+	public boolean clTop(Object obj){
+		Asteroid a = (Asteroid)obj;
+		return getY() + 20 >= a.getY() && getY() < a.getY() + a.getHeight() && 
+				(getX() >= a.getX() && getX() + 10 <= a.getX() + a.getWidth());
+	}
+	
 	public String toString()
 	{
 		return "";

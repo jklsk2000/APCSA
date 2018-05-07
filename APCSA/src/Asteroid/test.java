@@ -18,11 +18,12 @@ import javax.imageio.ImageIO;
 
 import unit17.Ammo;
 
-public class Board1 extends Canvas implements KeyListener, Runnable
+public class test extends Canvas implements KeyListener, Runnable
 {
 
 	private Spaceship ship;
 	private ArrayList <Asteroid> ast;
+	private int chance = 980000;
 	private ArrayList <PowerUp> pu;
 	private ArrayList <Laser> l;
 	private Laser laser;
@@ -30,12 +31,14 @@ public class Board1 extends Canvas implements KeyListener, Runnable
 	private Random rand;
 	private int lives;
 	private int ammocnt;
+	
+	private long start;
 
 	private boolean[] keys;
 	private BufferedImage back;
 	
 
-	public Board1()
+	public test()
 	{
 		setBackground(Color.black);
 
@@ -50,6 +53,8 @@ public class Board1 extends Canvas implements KeyListener, Runnable
 		
 		lives = 3;
 		ammocnt = 0;
+		
+		start = System.currentTimeMillis();
 
 		this.addKeyListener(this);
 		new Thread(this).start();
@@ -96,10 +101,18 @@ public class Board1 extends Canvas implements KeyListener, Runnable
 			ship.explode();
 		}
 		
+		
+		
+		long current = System.currentTimeMillis();
+		if((current - start) % 1000 == 1){
+			chance = chance - 500;
+			System.out.println(chance);
+			System.out.println(current);
+		}
 		int r = (int)(Math.random() * 800);
 		int sz = rand.nextInt(3);
 		int go = rand.nextInt(1000000);
-		if (go > 980000){
+		if (go > chance){
 			ast.add(new Asteroid(r,0,2,sz));
 		}		
 		

@@ -13,7 +13,7 @@ public class Game extends JFrame
 		super("ASTEROID");
 		setSize(WIDTH,HEIGHT);
 
-		Board1 game = new Board1();
+		test game = new test();
 		((Component)game).setFocusable(true);
 
 		getContentPane().add(game);
