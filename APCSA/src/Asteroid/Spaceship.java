@@ -10,6 +10,9 @@ public class Spaceship extends MovingThing implements Collidable
 {
 	private int speed;
 	private Image image;
+	private long start;
+	private boolean explode;
+
 
 	public Spaceship()
 	{
@@ -24,9 +27,9 @@ public class Spaceship extends MovingThing implements Collidable
 	public Spaceship(int x, int y, int s)
 	{
 		super(x, y);
-		
+		start = System.currentTimeMillis();
 		speed=s;
-		
+		explode = false;
 		try
 		{
 			image = ImageIO.read(new File("spaceship.png"));
@@ -39,6 +42,7 @@ public class Spaceship extends MovingThing implements Collidable
 
 	public void explode(){
 		speed = 0;
+		explode = true;
 		try
 		{
 			image = ImageIO.read(new File("explode.png"));
@@ -46,6 +50,13 @@ public class Spaceship extends MovingThing implements Collidable
 		catch(Exception e)
 		{
 			System.out.println("ERROR");
+		}
+	}
+	
+	public void time(){
+		long end = System.currentTimeMillis();
+		if (explode){
+			System.out.println("TIME: " + (end - start));
 		}
 	}
 	

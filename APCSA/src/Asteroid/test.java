@@ -3,6 +3,7 @@ package Asteroid;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Canvas;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyListener;
@@ -32,7 +33,10 @@ public class test extends Canvas implements KeyListener, Runnable
 	private int lives;
 	private int ammocnt;
 	
+	private Background b;
+	
 	private long start;
+	private boolean finish;
 
 	private boolean[] keys;
 	private BufferedImage back;
@@ -53,6 +57,8 @@ public class test extends Canvas implements KeyListener, Runnable
 		
 		lives = 3;
 		ammocnt = 0;
+		b = new Background();
+		finish = false;
 		
 		start = System.currentTimeMillis();
 
@@ -73,8 +79,9 @@ public class test extends Canvas implements KeyListener, Runnable
 		if(back==null)
 		   back = (BufferedImage)(createImage(getWidth(),getHeight()));
 		Graphics graphToBack = back.createGraphics();
-		graphToBack.setColor(Color.BLACK);
-		graphToBack.fillRect(0,0,800,600);
+//		graphToBack.setColor(Color.BLACK);
+//		graphToBack.fillRect(0,0,800,600);
+		b.draw(graphToBack);
 		graphToBack.setColor(Color.WHITE);
 		graphToBack.drawString("ASTEROID ", 25, 50 );
 		graphToBack.drawString("LIVES: " + lives,25,70);
@@ -96,26 +103,33 @@ public class test extends Canvas implements KeyListener, Runnable
 			ship.setY(545);
 		}
 		
-		//NO MORE LIVES
+		//SHIP EXPLODED
 		if (lives == 0){
 			ship.explode();
+			if(finish = false){
+				ship.time();
+			}
+			finish = true;
 		}
 		
-		
-		
+		//ASTEROID GENERATION
 		long current = System.currentTimeMillis();
-		if((current - start) % 1000 == 1){
+		
+		if(((current - start) % 1000 == 1) && chance > 500000){
 			chance = chance - 500;
-			System.out.println(chance);
-			System.out.println(current);
+//			System.out.println(chance);
+//			System.out.println(current);
 		}
+		
 		int r = (int)(Math.random() * 800);
 		int sz = rand.nextInt(3);
 		int go = rand.nextInt(1000000);
-		if (go > chance){
-			ast.add(new Asteroid(r,0,2,sz));
-		}		
 		
+		int aspd = 2 + rand.nextInt(2);
+		if (go > chance){
+			ast.add(new Asteroid(r,0,aspd,sz));
+		}		
+
 		for(int i = 0; i < ast.size(); i++){
 			if (lives == 0){
 				break;
@@ -127,15 +141,14 @@ public class test extends Canvas implements KeyListener, Runnable
 			}
 		}
 		
+		//POWERUP GENERATION
 		int s = (int)(Math.random() * 800);
 		int gopu = rand.nextInt(1000000);
-		
 		if (ammocnt < 5){
 			if (gopu > 999000){
 				pu.add(new PowerUp(s,0,2));
 			}
 		}
-		
 		for(int i = 0; i < pu.size(); i++){
 			if (lives == 0){
 				break;
@@ -165,7 +178,7 @@ public class test extends Canvas implements KeyListener, Runnable
 		}
 		if(keys[4] == true)
 		{
-			if(ammocnt > 0){
+			if((ammocnt > 0) && lives > 0){
 				laser = new Laser (ship.getX() + 15, ship.getY(), 2);
 				l.add(laser);
 				laser = new Laser (ship.getX() + 2, ship.getY() + 10, 2);
