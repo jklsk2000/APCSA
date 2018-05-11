@@ -24,7 +24,7 @@ public class Board extends Canvas implements KeyListener, Runnable
 
 	private Spaceship ship;
 	private ArrayList <Asteroid> ast;
-	private int chance = 980000;
+	private int chance = 950000;
 	private ArrayList <PowerUp> pu;
 	private ArrayList <Laser> l;
 	private Laser laser;
@@ -116,14 +116,14 @@ public class Board extends Canvas implements KeyListener, Runnable
 			long current = System.currentTimeMillis();
 			
 			if(((current - start) % 1000 == 1) && chance > 500000){
-				chance = chance - 500;
+				chance = chance - 1000;
 			}
 			
 			int r = (int)(Math.random() * 800);
 			int sz = rand.nextInt(3);
 			int go = rand.nextInt(1000000);
 			
-			int aspd = 3 + rand.nextInt(3);
+			int aspd = 3 + rand.nextInt(5);
 			if (go > chance){
 				ast.add(new Asteroid(r,0,aspd,sz));
 			}		
