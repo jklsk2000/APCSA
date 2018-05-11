@@ -43,7 +43,6 @@ public class Board extends Canvas implements KeyListener, Runnable
 	private boolean[] keys;
 	private BufferedImage back;
 	
-
 	public Board()
 	{
 		setBackground(Color.black);

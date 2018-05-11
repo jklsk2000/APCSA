@@ -30,7 +30,7 @@ public class PowerUp extends MovingThing
 		
 		try
 		{
-			image = ImageIO.read(new File("powerup.jpg"));			
+			image = ImageIO.read(new File("powerup.png"));			
 		}
 		catch(Exception e)
 		{

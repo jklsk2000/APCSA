@@ -27,7 +27,7 @@ public class Spaceship extends MovingThing implements Collidable
 		speed=s;
 		try
 		{
-			image = ImageIO.read(new File("spaceship.gif"));
+			image = ImageIO.read(new File("spaceship.png"));
 		}
 		catch(Exception e)
 		{
