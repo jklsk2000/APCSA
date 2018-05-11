@@ -10,11 +10,16 @@ public class Background
 {
 	private Image image;
 
-	public Background()
+	public Background(int x)
 	{
 		try
 		{
-			image = ImageIO.read(new File("background.png"));			
+			if(x == 0){ 
+				image = ImageIO.read(new File("background0.png"));			
+			}
+			if(x == 1){ 
+				image = ImageIO.read(new File("background.jpg"));			
+			}
 		}
 		catch(Exception e)
 		{

@@ -10,9 +10,6 @@ public class Spaceship extends MovingThing implements Collidable
 {
 	private int speed;
 	private Image image;
-	private long start;
-	private boolean explode;
-
 
 	public Spaceship()
 	{
@@ -27,12 +24,10 @@ public class Spaceship extends MovingThing implements Collidable
 	public Spaceship(int x, int y, int s)
 	{
 		super(x, y);
-		start = System.currentTimeMillis();
 		speed=s;
-		explode = false;
 		try
 		{
-			image = ImageIO.read(new File("spaceship.png"));
+			image = ImageIO.read(new File("spaceship.gif"));
 		}
 		catch(Exception e)
 		{
@@ -42,7 +37,6 @@ public class Spaceship extends MovingThing implements Collidable
 
 	public void explode(){
 		speed = 0;
-		explode = true;
 		try
 		{
 			image = ImageIO.read(new File("explode.png"));
@@ -50,13 +44,6 @@ public class Spaceship extends MovingThing implements Collidable
 		catch(Exception e)
 		{
 			System.out.println("ERROR");
-		}
-	}
-	
-	public void time(){
-		long end = System.currentTimeMillis();
-		if (explode){
-			System.out.println("TIME: " + (end - start));
 		}
 	}
 	
@@ -103,6 +90,17 @@ public class Spaceship extends MovingThing implements Collidable
 	}
 	public boolean cpTop(Object obj){
 		PowerUp p = (PowerUp)obj;
+		return getY() + 50 >= p.getY() && getY() < p.getY() + p.getHeight() && 
+				(getX() >= p.getX() - 30 && getX() + 40 <= p.getX() + p.getWidth() + 30);
+	}
+	
+	public boolean chBottom(Object obj){
+		Heart p = (Heart)obj;
+		return getY() <= p.getY() + p.getHeight() && getY() + 50 > p.getY() && 
+				(getX() >= p.getX() - 30 && getX() + 40 <= p.getX() + p.getWidth() + 30);
+	}
+	public boolean chTop(Object obj){
+		Heart p = (Heart)obj;
 		return getY() + 50 >= p.getY() && getY() < p.getY() + p.getHeight() && 
 				(getX() >= p.getX() - 30 && getX() + 40 <= p.getX() + p.getWidth() + 30);
 	}
