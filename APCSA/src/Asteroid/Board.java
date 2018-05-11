@@ -50,7 +50,7 @@ public class Board extends Canvas implements KeyListener, Runnable
 		keys = new boolean[6];
 		
 		rand = new Random();
-		ship = new Spaceship(500,400,3);
+		ship = new Spaceship(500,400,5);
 		ast = new ArrayList<Asteroid>();
 		pu = new ArrayList <PowerUp>();
 		l = new ArrayList <Laser>();
@@ -123,7 +123,7 @@ public class Board extends Canvas implements KeyListener, Runnable
 			int sz = rand.nextInt(3);
 			int go = rand.nextInt(1000000);
 			
-			int aspd = 2 + rand.nextInt(2);
+			int aspd = 3 + rand.nextInt(3);
 			if (go > chance){
 				ast.add(new Asteroid(r,0,aspd,sz));
 			}		
@@ -215,15 +215,15 @@ public class Board extends Canvas implements KeyListener, Runnable
 		if(keys[4] == true)
 		{
 			if((ammocnt > 0) && lives > 0){
-				laser = new Laser (ship.getX() + 15, ship.getY(), 2);
+				laser = new Laser (ship.getX() + 15, ship.getY(), 3);
 				l.add(laser);
-				laser = new Laser (ship.getX() + 2, ship.getY() + 10, 2);
+				laser = new Laser (ship.getX() + 2, ship.getY() + 10, 3);
 				l.add(laser);
-				laser = new Laser (ship.getX() + 28, ship.getY() + 10, 2);
+				laser = new Laser (ship.getX() + 28, ship.getY() + 10, 3);
 				l.add(laser);
-				laser = new Laser (ship.getX() - 10, ship.getY() + 20, 2);
+				laser = new Laser (ship.getX() - 10, ship.getY() + 20, 3);
 				l.add(laser);
-				laser = new Laser (ship.getX() + 40, ship.getY() + 20, 2);
+				laser = new Laser (ship.getX() + 40, ship.getY() + 20, 3);
 				l.add(laser);
 				ammocnt--;
 				keys[4] = false;
