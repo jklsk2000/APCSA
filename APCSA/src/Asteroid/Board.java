@@ -89,11 +89,13 @@ public class Board extends Canvas implements KeyListener, Runnable
 			graphToBack.setFont(new Font("Helvetica", Font.PLAIN, 45));
 			graphToBack.drawString("ASTEROID",300,240);
 			graphToBack.setFont(new Font("Helvetica", Font.PLAIN, 12));
+			graphToBack.drawString("Danny Lee, Period 4", 250, 270);
 			graphToBack.drawString("How To Play:", 250, 290);
 			graphToBack.drawString("WASD to move the ship", 260, 320);
 			graphToBack.drawString("ENTER to shoot lasers", 260, 340);
 			graphToBack.drawString("Avoid colliding with asteroids", 260, 360);
-			graphToBack.drawString("PRESS SPACE TO BEGIN", 260, 380);
+			graphToBack.drawString("One point for each asteroid destroyed", 260, 380);
+			graphToBack.drawString("PRESS SPACE TO BEGIN", 260, 400);
 
 			if (keys[5] == true){
 				game = 1;
